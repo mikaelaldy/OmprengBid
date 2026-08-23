@@ -1,0 +1,6 @@
+{
+  "name": "OmprengBid",
+  "description": "Competitive leaderboard and 2.5D isometric Ompreng tray stacking arcade game for tech builders and indie hackers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

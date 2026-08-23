@@ -1,0 +1,33 @@
+{
+  "entities": {
+    "projects": {
+      "title": "Projects",
+      "description": "Registered indie hacker and tech founder projects competing on the OmprengBid leaderboard",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "handle": { "type": "string" },
+        "tagline": { "type": "string" },
+        "category": { "type": "string" },
+        "bestScore": { "type": "number" },
+        "dailyBestScore": { "type": "number" },
+        "runsCount": { "type": "number" },
+        "clicksCount": { "type": "number" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" },
+        "verified": { "type": "boolean" },
+        "badge": { "type": "string" },
+        "lastPlayer": { "type": "string" }
+      },
+      "required": ["id", "name", "url", "handle", "tagline", "category"]
+    }
+  },
+  "firestore": {
+    "projects": {
+      "entity": "projects",
+      "description": "Collection storing all submitted projects and their real-time stacking leaderboard scores"
+    }
+  }
+}

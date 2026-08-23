@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.handle is string
+                    && request.resource.data.url is string;
+      allow update: if true;
+      allow delete: if false;
+    }
+  }
+}
