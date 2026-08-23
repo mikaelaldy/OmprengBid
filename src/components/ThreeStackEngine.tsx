@@ -6,7 +6,7 @@ import { Sparkles, Trophy, RotateCcw, Zap, Target } from 'lucide-react';
 import { Project } from '../types';
 
 interface ThreeStackEngineProps {
-  project: Project;
+  project?: Project | null;
   rank1Project?: Project;
   isPaused?: boolean;
   onOpenTutorial?: () => void;
@@ -97,86 +97,123 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
   const INITIAL_SIZE_Z = 2.6;
   const MOVE_BOUNDS = 4.8;
 
-  // Generate procedural realistic 5-compartment stainless steel texture
+  // Generate procedural authentic Indonesian MBG 5-compartment stainless steel tray texture
   const createOmprengTexture = (): THREE.CanvasTexture => {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
     canvas.height = 384;
     const ctx = canvas.getContext('2d')!;
 
-    // Stainless steel brushed gradient background
+    // 1. Stainless steel brushed gradient background
     const bgGrad = ctx.createLinearGradient(0, 0, 512, 384);
-    bgGrad.addColorStop(0, '#E6ECF2');
-    bgGrad.addColorStop(0.3, '#CBD5E1');
-    bgGrad.addColorStop(0.5, '#F1F5F9');
-    bgGrad.addColorStop(0.8, '#94A3B8');
-    bgGrad.addColorStop(1, '#CBD5E1');
+    bgGrad.addColorStop(0, '#E8EDF5');
+    bgGrad.addColorStop(0.25, '#FFFFFF');
+    bgGrad.addColorStop(0.5, '#CBD5E1');
+    bgGrad.addColorStop(0.75, '#F1F5F9');
+    bgGrad.addColorStop(1, '#94A3B8');
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, 512, 384);
 
-    // Subtle brushed metal streaks
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-    for (let i = 0; i < 40; i++) {
+    // 2. Realistic brushed stainless steel micro-streaks
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+    for (let i = 0; i < 50; i++) {
       const y = Math.random() * 384;
-      ctx.fillRect(0, y, 512, 1 + Math.random() * 2);
+      ctx.fillRect(0, y, 512, 1 + Math.random() * 1.5);
+    }
+    ctx.fillStyle = 'rgba(100, 116, 139, 0.1)';
+    for (let i = 0; i < 35; i++) {
+      const y = Math.random() * 384;
+      ctx.fillRect(0, y, 512, 1);
     }
 
-    // Outer rim border
-    ctx.strokeStyle = '#64748B';
-    ctx.lineWidth = 8;
-    ctx.strokeRect(10, 10, 492, 364);
+    // 3. Heavy Stamped Outer Rim & Bevels
+    ctx.strokeStyle = '#475569';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(6, 6, 500, 372);
 
     ctx.strokeStyle = '#FFFFFF';
     ctx.lineWidth = 3;
-    ctx.strokeRect(14, 14, 484, 356);
+    ctx.strokeRect(12, 12, 488, 360);
 
-    // 5 Compartments layout (Standard Indonesian MBG 5-Sekat Tray):
-    // Left: Big Main Compartment (Rice / Nasi)
-    ctx.fillStyle = 'rgba(7, 30, 73, 0.08)';
-    ctx.strokeStyle = '#475569';
+    ctx.strokeStyle = '#64748B';
     ctx.lineWidth = 4;
+    ctx.strokeRect(18, 18, 476, 348);
 
-    const roundRect = (x: number, y: number, w: number, h: number, r: number) => {
+    // Helper for stamped metallic compartment cavities
+    const drawMbgCompartment = (
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+      r: number,
+      isCircle = false
+    ) => {
+      // Outer drop shadow (stamped indentation effect)
+      ctx.save();
+      ctx.shadowColor = 'rgba(15, 23, 42, 0.4)';
+      ctx.shadowBlur = 6;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 3;
+
       ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.lineTo(x + w - r, y);
-      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-      ctx.lineTo(x + w, y + h - r);
-      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-      ctx.lineTo(x + r, y + h);
-      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-      ctx.lineTo(x, y + r);
-      ctx.quadraticCurveTo(x, y, x + r, y);
-      ctx.closePath();
+      if (isCircle) {
+        ctx.arc(x + w / 2, y + h / 2, Math.min(w, h) / 2, 0, Math.PI * 2);
+      } else {
+        ctx.roundRect(x, y, w, h, r);
+      }
+
+      // Deep metallic cavity gradient
+      const compGrad = ctx.createRadialGradient(
+        x + w * 0.35, y + h * 0.35, Math.min(w, h) * 0.08,
+        x + w * 0.5, y + h * 0.5, Math.max(w, h) * 0.65
+      );
+      compGrad.addColorStop(0, '#FFFFFF');
+      compGrad.addColorStop(0.2, '#E2E8F0');
+      compGrad.addColorStop(0.65, '#94A3B8');
+      compGrad.addColorStop(1, '#475569');
+
+      ctx.fillStyle = compGrad;
       ctx.fill();
+      ctx.restore();
+
+      // Pressed inner border rim
+      ctx.save();
+      ctx.beginPath();
+      if (isCircle) {
+        ctx.arc(x + w / 2, y + h / 2, Math.min(w, h) / 2, 0, Math.PI * 2);
+      } else {
+        ctx.roundRect(x, y, w, h, r);
+      }
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#334155';
       ctx.stroke();
+
+      // Specular highlight on bottom-right bevel
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.stroke();
+      ctx.restore();
     };
 
-    // 1. Nasi / Rice section (left side)
-    roundRect(26, 26, 210, 332, 14);
+    // --- AUTHENTIC MBG 5-SEKAT LAYOUT ---
+    // Top Row (3 compartments)
+    drawMbgCompartment(26, 26, 126, 150, 16);     // Top-Left (Lauk Pauk 1)
+    drawMbgCompartment(164, 26, 184, 150, 18);    // Top-Center (Lauk Utama / Sayur Tumis)
+    drawMbgCompartment(360, 26, 126, 150, 16);    // Top-Right (Lauk Pauk 2 / Buah Potong)
 
-    // 2. Lauk Utama (Protein / Chicken / Fish - top middle)
-    roundRect(250, 26, 140, 155, 12);
+    // Bottom Row (2 compartments)
+    drawMbgCompartment(26, 190, 290, 168, 18);    // Bottom-Left Wide (Nasi / Main Carb)
+    drawMbgCompartment(330, 190, 156, 168, 78, true); // Bottom-Right Round (Mangkok Kuah / Sayur Bening / Susu)
 
-    // 3. Sayur (Veggies - bottom middle)
-    roundRect(250, 195, 140, 163, 12);
-
-    // 4. Buah (Fruit - top right)
-    roundRect(402, 26, 84, 155, 10);
-
-    // 5. Susu / Sambal cup (Round - bottom right)
-    ctx.beginPath();
-    ctx.arc(444, 276, 42, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-
-    // Embossed Institutional Stamp in the Rice section
-    ctx.fillStyle = 'rgba(7, 30, 73, 0.28)';
-    ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+    // Laser Stamped SUS 304 Institutional Mark
+    ctx.save();
+    ctx.fillStyle = 'rgba(30, 41, 59, 0.45)';
+    ctx.font = 'bold 12px "Courier New", monospace';
     ctx.textAlign = 'center';
-    ctx.fillText('OMPRENG • BID', 131, 185);
-    ctx.font = '9px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText('SUS 304 STAINLESS STEEL', 131, 202);
+    ctx.fillText('MBG • SUS 304 STAINLESS', 171, 275);
+    ctx.font = '9px "Courier New", monospace';
+    ctx.fillText('PRESET ARCADIA • 5-SEKAT', 171, 292);
+    ctx.restore();
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.anisotropy = 4;
@@ -509,7 +546,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
         active.mesh = restoredMesh;
 
         setComboAlert({
-          title: `LEBAR BAKI PULIH (+${restoreAmount.toFixed(2)})`,
+          title: `LEBAR OMPRENG PULIH (+${restoreAmount.toFixed(2)})`,
           subtitle: `5x Presisi Beruntun • Bonus Multiplier x${newMultiplier} (+${pointsGained} pts)`,
           isRestore: true,
         });
@@ -677,7 +714,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
           {String(traysStacked).padStart(2, '0')}
         </span>
         <p className="text-[11px] font-medium text-slate-500 bg-white/80 border border-slate-200 px-3 py-0.5 rounded-full shadow-xs -mt-1">
-          Tumpukan Baki Ompreng
+          Tumpukan Ompreng
         </p>
       </div>
 
@@ -691,10 +728,10 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
           <div className="w-2.5 h-2.5 rounded-full bg-[#D1B06C] animate-pulse shrink-0" />
           <div>
             <div className="text-[10px] text-[#D1B06C] font-medium">
-              Mewakili Proyek
+              {project ? 'Mewakili Proyek' : 'Tumpuk Ompreng'}
             </div>
             <div className="text-xs sm:text-sm font-semibold tracking-tight truncate max-w-[150px] sm:max-w-[220px]">
-              {project.name}
+              {project ? project.name : 'Sesi Bebas (Siap Didaftarkan)'}
             </div>
           </div>
         </div>
@@ -710,7 +747,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
               <span className="text-xs text-slate-400 font-sans font-normal">pts</span>
             </div>
             <div className="text-[11px] font-mono text-slate-500 mt-0.5">
-              {traysStacked} baki ({(traysStacked * 0.045).toFixed(2)}m)
+              {traysStacked} ompreng ({(traysStacked * 0.045).toFixed(2)}m)
             </div>
           </div>
 
@@ -719,7 +756,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
             <div className="bg-slate-800/90 text-slate-200 border border-slate-700 px-2.5 py-1 rounded-lg text-xs font-medium flex items-center space-x-1.5 shadow-xs">
               <Target className="w-3 h-3 text-[#D1B06C]" />
               <span>
-                <strong className="text-[#D1B06C] font-semibold">{gapToRank1}</strong> baki menuju #1
+                <strong className="text-[#D1B06C] font-semibold">{gapToRank1}</strong> ompreng menuju #1
               </span>
             </div>
           )}

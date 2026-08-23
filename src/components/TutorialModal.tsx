@@ -40,10 +40,10 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
             </div>
             <div>
               <h3 className="text-base sm:text-lg font-bold">
-                Tutorial & Cara Bermain OmprengBid
+                Tutorial & Cara Bermain
               </h3>
               <p className="text-xs text-[#D1B06C]">
-                Panduan Presisi Stacking Menara Baki Stainless Steel
+                Panduan Tumpuk Menara Ompreng Stainless Steel
               </p>
             </div>
           </div>
@@ -114,10 +114,10 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 </div>
                 <div>
                   <h4 className="font-bold text-[#071E49] text-sm">
-                    Cara Menjatuhkan Baki
+                    Cara Menjatuhkan Ompreng
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Baki ompreng bergerak bolak-balik secara otomatis. <strong>Klik pada layar</strong>, <strong>ketuk (tap) di HP</strong>, atau tekan tombol <kbd className="bg-white border border-slate-300 px-1.5 py-0.5 rounded text-[11px] font-mono text-slate-800 shadow-2xs">SPACE</kbd> di keyboard untuk menjatuhkan baki ke atas menara.
+                    Ompreng bergerak bolak-balik secara otomatis. <strong>Klik pada layar</strong>, <strong>ketuk (tap) di HP</strong>, atau tekan tombol <kbd className="bg-white border border-slate-300 px-1.5 py-0.5 rounded text-[11px] font-mono text-slate-800 shadow-2xs">SPACE</kbd> di keyboard untuk menjatuhkan ompreng ke atas menara.
                   </p>
                 </div>
               </div>
@@ -131,7 +131,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                     Mekanisme Pemotongan Presisi
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Setiap bagian baki yang melewati tepi alas sebelumnya akan terpotong secara gravitasi. Lebar baki berikutnya akan <strong>mengecil mengikuti sisa baki yang mendarat</strong>.
+                    Setiap bagian ompreng yang melewati tepi alas sebelumnya akan terpotong. Ukuran ompreng berikutnya akan <strong>mengecil mengikuti sisa ompreng yang mendarat</strong>.
                   </p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
               <div className="bg-amber-50/60 border border-amber-200 rounded-xl p-3.5 text-xs text-amber-900 flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
                 <span>
-                  <strong>Game Over:</strong> Permainan berakhir jika baki yang dijatuhkan meleset seluruhnya dari baki di bawahnya.
+                  <strong>Game Over:</strong> Permainan berakhir jika ompreng yang dijatuhkan meleset seluruhnya dari ompreng di bawahnya.
                 </span>
               </div>
             </div>
@@ -157,7 +157,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                     <span className="bg-[#D1B06C]/20 text-[#071E49] text-[10px] px-2 py-0.2 rounded-full font-mono">Combo!</span>
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Jika baki dijatuhkan sangat pas dengan baki di bawahnya, baki akan terkunci secara simetris tanpa terpotong! Kamu mendapatkan <strong>bonus poin kombo</strong> yang terus berlipat ganda (x2, x3, x4, dst).
+                    Jika ompreng dijatuhkan sangat pas dengan ompreng di bawahnya, posisinya otomatis terkunci rapi tanpa terpotong! Kamu mendapatkan <strong>bonus poin combo</strong> yang berlipat ganda (x2, x3, x4, dst).
                   </p>
                 </div>
               </div>
@@ -168,11 +168,11 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 </div>
                 <div>
                   <h4 className="font-bold text-[#071E49] text-sm flex items-center gap-1.5">
-                    <span>Restorasi Baki (Kelipatan 5 Kombo)</span>
+                    <span>Restorasi Ompreng (Kelipatan 5 Combo)</span>
                     <span className="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.2 rounded-full font-mono">+0.35u</span>
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Baki kamu sudah terpotong dan mengecil? Tenang! Setiap berhasil mencapai <strong>5 kombo sempurna beruntun</strong> (5x, 10x, 15x...), lebar baki ompreng akan otomatis <strong>diperluas kembali</strong>!
+                    Omprengmu sudah terpotong dan mengecil? Tenang! Setiap berhasil mencapai <strong>5 combo sempurna beruntun</strong> (5x, 10x, 15x...), lebar ompreng akan otomatis <strong>diperlebar kembali</strong>!
                   </p>
                 </div>
               </div>
@@ -184,7 +184,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 </div>
                 <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
                   <div className="text-emerald-700 text-[11px] font-medium">Streak ke-5</div>
-                  <div className="text-xs font-bold text-emerald-800 mt-0.5">Ukuran Baki Pulih 🍱</div>
+                  <div className="text-xs font-bold text-emerald-800 mt-0.5">Ukuran Ompreng Pulih 🍱</div>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                     Dongkrak Proyek ke Billboard #1
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Setiap kamu bermain, skor dan jumlah tumpukan baki akan otomatis diakumulasikan ke proyek/startup yang kamu wakili. Proyek dengan tumpukan tertinggi berhak menjadi <strong>Reigning #1 Champion</strong> di Billboard Utama!
+                    Setiap kamu bermain, skor dan jumlah tumpukan ompreng akan otomatis diakumulasikan ke proyek yang kamu pilih. Proyek dengan tumpukan tertinggi berhak menjadi <strong>Juara Bertahan</strong> di Billboard Utama!
                   </p>
                 </div>
               </div>
@@ -212,10 +212,10 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 </div>
                 <div>
                   <h4 className="font-bold text-[#071E49] text-sm">
-                    Sertifikat Prestasi & Berbagi Skor
+                    Kartu Bukti Rekor & Share
                   </h4>
                   <p className="text-slate-600 text-xs mt-1">
-                    Setelah sesi berakhir, kamu bisa mencetak Sertifikat Prestasi Menara Baki atau membagikan rekor tumpukanmu ke X (Twitter) & Discord.
+                    Setelah sesi berakhir, kamu bisa mencetak Kartu Bukti Rekor atau membagikan rekor tumpukanmu ke X (Twitter) & Discord.
                   </p>
                 </div>
               </div>

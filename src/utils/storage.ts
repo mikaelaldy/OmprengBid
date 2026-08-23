@@ -3,14 +3,38 @@ import {
   registerProjectFirestore,
   recordGameRunFirestore,
   incrementClickFirestore,
+  recordVisitorVisitFirestore,
+  subscribeToSiteStats,
+  startLiveVisitorHeartbeat,
   subscribeToProjects as subscribeFirestore,
+  SiteStats,
 } from '../lib/firebase';
 
 const STORAGE_KEY = 'omprengbid_projects_v5';
 const DAILY_DATE_KEY = 'omprengbid_daily_date_v5';
 const LAST_PLAYER_HANDLE_KEY = 'omprengbid_last_player_handle';
+const VISITOR_RECORDED_SESSION_KEY = 'omprengbid_visitor_logged_v1';
 
 export const INITIAL_PROJECTS: Project[] = [];
+
+/**
+ * Record visitor visit once per browser session
+ */
+export function trackUniqueSessionVisit(): void {
+  try {
+    const hasRecorded = sessionStorage.getItem(VISITOR_RECORDED_SESSION_KEY);
+    if (!hasRecorded) {
+      sessionStorage.setItem(VISITOR_RECORDED_SESSION_KEY, 'true');
+      recordVisitorVisitFirestore();
+    }
+  } catch (e) {
+    recordVisitorVisitFirestore();
+  }
+}
+
+export { subscribeToSiteStats, startLiveVisitorHeartbeat };
+export type { SiteStats };
+
 
 export function getTodayDateString(): string {
   const d = new Date();
@@ -66,6 +90,7 @@ export async function registerNewProject(data: {
   handle: string;
   tagline: string;
   category: ProjectCategory;
+  initialScore?: number;
 }): Promise<Project> {
   const newProject = await registerProjectFirestore(data);
   const currentCached = loadCachedProjects();

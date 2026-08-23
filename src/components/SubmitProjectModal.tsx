@@ -7,6 +7,7 @@ import { trackProjectRegistered } from '../lib/analytics';
 
 interface SubmitProjectModalProps {
   isOpen: boolean;
+  initialScore?: number;
   onClose: () => void;
   onSuccess: (newProject: Project) => void;
 }
@@ -23,6 +24,7 @@ const CATEGORIES: ProjectCategory[] = [
 
 export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
   isOpen,
+  initialScore,
   onClose,
   onSuccess,
 }) => {
@@ -62,6 +64,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
         handle: handle.trim(),
         tagline: tagline.trim() || 'Inovasi ekosistem digital builder nusantara',
         category,
+        initialScore: initialScore && initialScore > 0 ? initialScore : 0,
       });
 
       trackProjectRegistered(newProj.name, newProj.category, newProj.handle);
@@ -92,7 +95,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 Pendaftaran Proyek Builder
               </h3>
               <p className="text-xs text-[#D1B06C]">
-                Papan Peringkat Nasional & Menara Baki
+                Papan Peringkat & Tumpukan Ompreng
               </p>
             </div>
           </div>
@@ -107,6 +110,26 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {initialScore && initialScore > 0 && (
+            <div className="bg-gradient-to-r from-[#071E49] to-[#0D2C66] text-white p-3.5 rounded-xl flex items-center justify-between border border-[#D1B06C]/40 shadow-xs">
+              <div className="space-y-0.5">
+                <div className="text-[11px] text-[#D1B06C] font-semibold flex items-center space-x-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D1B06C]" />
+                  <span>Klaim Rekor Sesi Main</span>
+                </div>
+                <div className="text-xs text-slate-200">
+                  Proyek ini akan langsung terdaftar dengan rekor awal:
+                </div>
+              </div>
+              <div className="text-right pl-3">
+                <span className="text-lg font-bold font-mono text-[#D1B06C]">
+                  {initialScore}
+                </span>
+                <span className="text-[10px] text-slate-300 ml-1">ompreng</span>
+              </div>
+            </div>
+          )}
+
           {error && (
             <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium p-3 rounded-xl">
               {error}

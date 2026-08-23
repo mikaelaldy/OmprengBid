@@ -6,7 +6,7 @@ import { sound } from '../utils/audio';
 
 interface BillboardBannerProps {
   rank1Project: Project;
-  onPlayProject: (project: Project) => void;
+  onPlayProject: (project?: Project) => void;
   onSelectProject: () => void;
   onOpenCertificate?: (project: Project) => void;
 }
@@ -28,12 +28,12 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
       {/* Top Banner Ribbon */}
       <div className="bg-[#051636]/90 text-slate-300 px-5 py-2.5 flex items-center justify-between text-xs border-b border-slate-800">
         <div className="flex items-center space-x-2">
-          <Trophy className="w-3.5 h-3.5 text-[#D1B06C]" />
-          <span className="font-semibold text-slate-100 tracking-wide">Papan Juara #1 Nasional</span>
+          <Flame className="w-3.5 h-3.5 text-orange-400" />
+          <span className="font-semibold text-slate-100 tracking-wide">SPOT UTAMA #1</span>
         </div>
         <div className="flex items-center space-x-2 text-xs">
           <span className="hidden sm:inline text-slate-400">
-            Proyek Unggulan #1
+            Didukung builder komunitas dengan rekor {rank1Project.bestScore} ompreng
           </span>
           <span className="bg-[#D1B06C]/10 text-[#D1B06C] border border-[#D1B06C]/30 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
             Live #1
@@ -51,7 +51,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
             <div className="flex flex-wrap items-center gap-2">
               <span className="bg-slate-800/80 border border-slate-700 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
                 <CrownIcon className="w-3.5 h-3.5 text-[#D1B06C]" />
-                <span>Peringkat 1</span>
+                <span>Juara Bertahan</span>
               </span>
 
               <span className="bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-md">
@@ -61,7 +61,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               {rank1Project.verified && (
                 <span className="bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Katalog Resmi</span>
+                  <span>Katalog Terverifikasi</span>
                 </span>
               )}
             </div>
@@ -128,6 +128,19 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
 
           {/* Right Action Column (4 columns) */}
           <div className="lg:col-span-4 flex flex-col space-y-2.5">
+            {/* Primary Game CTA: Play Now Directly to Beat #1 */}
+            <button
+              id="btn-stack-to-beat-rank1"
+              onClick={() => {
+                sound.playClick();
+                onPlayProject();
+              }}
+              className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold text-xs sm:text-sm px-4 py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+            >
+              <Play className="w-4 h-4 fill-current text-[#071E49]" />
+              <span>Main Sekarang & Tantang #1</span>
+            </button>
+
             {/* Direct Project External Link Button */}
             <a
               id="btn-visit-rank1-project"
@@ -135,31 +148,30 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleExternalClick}
-              className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+              className="w-full bg-white/10 hover:bg-white/20 text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-white/20 shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
             >
               <span>Kunjungi {rank1Project.name}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#071E49]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#D1B06C]" />
             </a>
 
-            {/* Primary Game CTA: Stack to Beat #1 */}
-            <button
-              id="btn-stack-to-beat-rank1"
-              onClick={onSelectProject}
-              className="w-full bg-white hover:bg-slate-50 text-[#071E49] font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition border border-slate-200 active:scale-95"
-            >
-              <Flame className="w-4 h-4 text-orange-500" />
-              <span>Tantang Juara #1</span>
-            </button>
+            {/* Boost Rank 1 directly or Select other project */}
+            <div className="grid grid-cols-2 gap-2 pt-0.5">
+              <button
+                id="btn-boost-rank1-directly"
+                onClick={() => onPlayProject(rank1Project)}
+                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95 truncate"
+              >
+                <span>Dukung #{rank1Project.name}</span>
+              </button>
 
-            {/* Instant Play for Rank 1 directly */}
-            <button
-              id="btn-boost-rank1-directly"
-              onClick={() => onPlayProject(rank1Project)}
-              className="w-full bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-xs px-4 py-2 rounded-xl border border-slate-700 flex items-center justify-center space-x-1.5 transition active:scale-95"
-            >
-              <Play className="w-3 h-3 text-[#D1B06C] fill-current" />
-              <span>Dukung {rank1Project.name}</span>
-            </button>
+              <button
+                id="btn-choose-other-project"
+                onClick={onSelectProject}
+                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95"
+              >
+                <span>Pilih Proyek Lain</span>
+              </button>
+            </div>
           </div>
 
         </div>

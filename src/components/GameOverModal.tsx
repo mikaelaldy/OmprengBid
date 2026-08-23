@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, RotateCcw, Award, Sparkles, Share2, ExternalLink, ArrowRight, ShieldCheck, Flame, Check, Copy } from 'lucide-react';
+import { Trophy, RotateCcw, Award, Sparkles, Share2, ExternalLink, ArrowRight, ShieldCheck, Flame, Check, Copy, Plus, Layers } from 'lucide-react';
 import { Project } from '../types';
 import { sound } from '../utils/audio';
 import { trackShare } from '../lib/analytics';
@@ -11,11 +11,12 @@ interface GameOverModalProps {
   maxCombo: number;
   perfectDrops: number;
   heightMeters: number;
-  project: Project;
+  project: Project | null;
   isNewRank1: boolean;
   currentRank: number;
   onPlayAgain: () => void;
   onChangeProject: () => void;
+  onRegisterProject?: (score: number) => void;
   onOpenCertificate: () => void;
   onClose: () => void;
 }
@@ -32,6 +33,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   currentRank,
   onPlayAgain,
   onChangeProject,
+  onRegisterProject,
   onOpenCertificate,
   onClose,
 }) => {
@@ -39,27 +41,35 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
 
   if (!isOpen) return null;
 
+  const isGuestMode = !project;
+  const projectName = project ? project.name : 'Sesi Arcade';
+  const projectHandle = project ? project.handle : '@builder';
+
   const appUrl = window.location.origin.includes('ai.studio') || window.location.origin.includes('localhost') 
     ? 'https://omprengbid.ai.studio' 
     : window.location.origin;
   const precisionPercent = traysStacked > 0 ? Math.round((perfectDrops / traysStacked) * 100) : 0;
 
   // Pre-formatted text for X (Twitter)
-  const twitterMessage = `🍱 Saya berhasil menumpuk ${traysStacked} baki Ompreng (${heightMeters}m, Max Combo x${maxCombo}) dengan skor ${score.toLocaleString()} pts untuk mem-boost proyek ${project.handle} di OmprengBid by @mikaships_dev! 🇮🇩✨\n\nCoba kalahkan rekor saya di:\n${appUrl}\n#OmprengBid #IndieHackerID #BuildInPublic`;
+  const twitterMessage = isGuestMode
+    ? `🍱 Baru aja numpuk ${traysStacked} ompreng stainless (${heightMeters}m, Max Combo x${maxCombo}) dapet skor ${score.toLocaleString()} pts di OmprengBid by @mikaships_dev! 🇮🇩✨\n\nAda yang bisa nandingin tingginya? Coba sekarang di:\n${appUrl}\n#OmprengBid #IndieHackerID #BuildInPublic`
+    : `🍱 Baru aja numpuk ${traysStacked} ompreng stainless demi naikin ranking ${projectHandle} ke posisi #${currentRank} di OmprengBid by @mikaships_dev! (${score.toLocaleString()} pts) 🇮🇩✨\n\nBantu naikin rankingnya di:\n${appUrl}\n#OmprengBid #IndieHackerID #BuildInPublic`;
 
   // Pre-formatted Markdown for Discord
-  const discordMessage = `🍱 **OmprengBid — Menara Baki Run**\n🏆 **Skor:** \`${score.toLocaleString()} pts\` | 🍱 **Tumpukan:** \`${traysStacked} Ompreng (${heightMeters}m)\`\n🔥 **Max Combo:** \`x${maxCombo}\` | ✨ **Presisi:** \`${perfectDrops} perfect (${precisionPercent}%)\`\n🚀 **Mendukung:** \`${project.name} (${project.handle})\`\n👉 Mainkan sekarang: <${appUrl}>`;
+  const discordMessage = isGuestMode
+    ? `🍱 **OmprengBid — Tumpukan Ompreng Run**\n🏆 **Skor:** \`${score.toLocaleString()} pts\` | 🍱 **Tumpukan:** \`${traysStacked} Ompreng (${heightMeters}m)\`\n🔥 **Max Combo:** \`x${maxCombo}\` | ✨ **Presisi:** \`${perfectDrops} perfect (${precisionPercent}%)\`\n👉 Mainkan & daftarkan proyekmu: <${appUrl}>`
+    : `🍱 **OmprengBid — Tumpukan Ompreng Run**\n🏆 **Skor:** \`${score.toLocaleString()} pts\` | 🍱 **Tumpukan:** \`${traysStacked} Ompreng (${heightMeters}m)\`\n🔥 **Max Combo:** \`x${maxCombo}\` | ✨ **Presisi:** \`${perfectDrops} perfect (${precisionPercent}%)\`\n🚀 **Mendukung:** \`${projectName} (${projectHandle})\`\n👉 Mainkan sekarang: <${appUrl}>`;
 
   const handleShareTwitter = () => {
     sound.playClick();
-    trackShare('twitter', project.name);
+    trackShare('twitter', projectName);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`;
     window.open(twitterUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyDiscord = async () => {
     sound.playClick();
-    trackShare('discord', project.name);
+    trackShare('discord', projectName);
     try {
       await navigator.clipboard.writeText(discordMessage);
       setCopiedType('discord');
@@ -71,12 +81,12 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
 
   const handleShareGeneral = async () => {
     sound.playClick();
-    trackShare('copy', project.name);
+    trackShare('copy', projectName);
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `OmprengBid: Menara ${traysStacked} Baki (${score.toLocaleString()} pts)`,
-          text: `Saya menumpuk ${traysStacked} baki Ompreng untuk mendongkrak proyek ${project.name} di OmprengBid!`,
+          title: `OmprengBid: Menara ${traysStacked} Ompreng (${score.toLocaleString()} pts)`,
+          text: `Saya menumpuk ${traysStacked} ompreng (${score.toLocaleString()} pts) di OmprengBid!`,
           url: appUrl,
         });
       } catch {
@@ -102,12 +112,12 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
           {isNewRank1 && (
             <div className="inline-flex items-center space-x-1.5 bg-[#D1B06C] text-[#071E49] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-2.5 shadow-sm">
               <Trophy className="w-3.5 h-3.5" />
-              <span>Peringkat #1 Nasional Baru!</span>
+              <span>Peringkat #1 Baru!</span>
             </div>
           )}
 
           <div className="text-xs text-[#D1B06C] font-medium">
-            Sesi Menara Baki Selesai
+            Sesi Tumpukan Ompreng Selesai
           </div>
 
           {/* Primary High-Impact Stats Row */}
@@ -128,7 +138,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
             {/* Trays Stacked */}
             <div className="pl-2">
               <div className="text-[11px] text-slate-400 font-medium">
-                Tumpukan Baki
+                Tumpukan Ompreng
               </div>
               <div className="text-xl sm:text-2xl font-bold font-mono text-white mt-0.5">
                 {traysStacked}
@@ -157,43 +167,69 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         {/* Scrollable Content Body */}
         <div className="p-5 sm:p-6 space-y-4 overflow-y-auto">
           
-          {/* Project Summary Card */}
-          <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
-            <div className="space-y-0.5">
-              <div className="text-[11px] text-slate-500 font-medium">
-                Proyek yang Diperkokoh
+          {/* If Guest Mode: Call to Action to Register Project with this Score */}
+          {isGuestMode ? (
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 border border-[#D1B06C]/40 p-4 rounded-xl space-y-2">
+              <div className="flex items-center space-x-2 text-[#071E49]">
+                <Sparkles className="w-4 h-4 text-[#D1B06C]" />
+                <span className="font-bold text-sm">Punya Proyek atau Side-Project?</span>
               </div>
-              <div className="text-sm font-semibold text-[#071E49] flex items-center space-x-1.5">
-                <span>{project.name}</span>
-                {project.verified && <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C]" />}
-              </div>
-              <div className="text-xs text-slate-500 font-mono">
-                {project.handle}
-              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Klaim rekor <strong className="text-[#071E49]">{traysStacked} ompreng ({score.toLocaleString()} pts)</strong> ini buat jadi modal awal startup lu di leaderboard. Langsung nongkrong di ranking atas tanpa mulai dari nol!
+              </p>
+              {onRegisterProject && (
+                <button
+                  id="btn-claim-score-register"
+                  onClick={() => {
+                    sound.playClick();
+                    onRegisterProject(traysStacked);
+                  }}
+                  className="w-full bg-[#071E49] hover:bg-[#0c2a63] text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-lg shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 mt-1"
+                >
+                  <Plus className="w-4 h-4 text-[#D1B06C]" />
+                  <span>Pasang Proyek Pake Rekor Ini</span>
+                </button>
+              )}
             </div>
+          ) : (
+            /* Project Summary Card */
+            <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
+              <div className="space-y-0.5">
+                <div className="text-[11px] text-slate-500 font-medium">
+                  Proyek yang Didukung
+                </div>
+                <div className="text-sm font-semibold text-[#071E49] flex items-center space-x-1.5">
+                  <span>{project.name}</span>
+                  {project.verified && <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C]" />}
+                </div>
+                <div className="text-xs text-slate-500 font-mono">
+                  {project.handle}
+                </div>
+              </div>
 
-            <div className="text-right">
-              <div className="text-[11px] text-slate-500 font-medium">
-                Peringkat
-              </div>
-              <div className="text-xl font-bold font-mono text-[#071E49]">
-                #{currentRank}
-              </div>
-              <div className="text-[11px] font-mono text-[#D1B06C] font-semibold">
-                Rekor: {project.bestScore} baki
+              <div className="text-right">
+                <div className="text-[11px] text-slate-500 font-medium">
+                  Peringkat
+                </div>
+                <div className="text-xl font-bold font-mono text-[#071E49]">
+                  #{currentRank}
+                </div>
+                <div className="text-[11px] font-mono text-[#D1B06C] font-semibold">
+                  Rekor: {project.bestScore} ompreng
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Prominent Share Your Score Section */}
           <div className="bg-[#071E49]/5 border border-[#071E49]/10 p-4 rounded-xl space-y-2.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-1.5 text-xs font-semibold text-[#071E49]">
                 <Share2 className="w-4 h-4 text-[#D1B06C]" />
-                <span>Bagikan Skor Anda</span>
+                <span>Pamerkan Rekor Anda</span>
               </div>
               <span className="text-[11px] text-slate-500">
-                Viralize di Komunitas
+                Ajak Komunitas
               </span>
             </div>
 
@@ -263,7 +299,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
               className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-semibold text-sm py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95"
             >
               <RotateCcw className="w-4 h-4" />
-              <span>Tumpuk Lagi ({project.name})</span>
+              <span>Main Lagi (Tumpuk Ulang)</span>
             </button>
 
             {/* Certificate Button */}
@@ -276,7 +312,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
               className="w-full bg-slate-100 hover:bg-slate-200 text-[#071E49] font-medium text-xs py-2.5 px-3 rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition"
             >
               <Award className="w-4 h-4 text-[#D1B06C]" />
-              <span>Lihat Sertifikat Prestasi Menara</span>
+              <span>Lihat Kartu Bukti Rekor</span>
             </button>
 
             {/* Bottom Nav Links */}
@@ -285,7 +321,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                 onClick={onChangeProject}
                 className="hover:text-[#071E49] transition underline-offset-2 hover:underline"
               >
-                Pilih Proyek Lain
+                {isGuestMode ? 'Tautkan ke Proyek di Leaderboard' : 'Pilih Proyek Lain'}
               </button>
 
               <button
@@ -305,3 +341,4 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
     </div>
   );
 };
+

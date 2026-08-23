@@ -9,5 +9,17 @@ service cloud.firestore {
       allow update: if true;
       allow delete: if false;
     }
+
+    match /site_stats/{statId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    match /active_visitors/{sessionId} {
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
   }
 }
+

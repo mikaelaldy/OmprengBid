@@ -24,10 +24,10 @@ export const RegulationsModal: React.FC<RegulationsModalProps> = ({
             </div>
             <div>
               <h3 className="text-base sm:text-lg font-bold">
-                Regulasi & Mekanisme OmprengBid
+                Cara Main & Aturan
               </h3>
               <p className="text-xs text-[#D1B06C]">
-                Panduan Presisi & Mekanisme Stacking Menara Baki
+                Panduan Tumpuk Ompreng & Papan Peringkat
               </p>
             </div>
           </div>
@@ -46,56 +46,48 @@ export const RegulationsModal: React.FC<RegulationsModalProps> = ({
           <div className="space-y-1">
             <h4 className="font-semibold text-sm text-[#071E49] flex items-center space-x-2">
               <Trophy className="w-4 h-4 text-[#D1B06C]" />
-              <span>1. Konsep OmprengBid & Papan Peringkat</span>
+              <span>1. Tentang OmprengBid</span>
             </h4>
             <p className="text-slate-600 font-normal">
-              OmprengBid adalah arena gamifikasi viral yang menghubungkan para <strong>indie hackers, tech founders, dan software engineers</strong> Indonesia dalam tantangan arcade menara baki stainless steel. Semakin tinggi tumpukan ompreng stainless steel yang kamu capai, semakin tinggi posisi proyekmu di papan peringkat nasional.
+              OmprengBid adalah etalase proyek untuk <strong>indie hackers, tech founders, dan software engineers</strong> Indonesia. Gak perlu bakar duit ads, cukup tumpuk ompreng stainless setinggi-tingginya untuk membuktikan daya tahan proyekmu dan rebut posisi puncak di leaderboard.
             </p>
           </div>
 
-          {/* Section 2: Mekanisme 2.5D Isometric Stacking */}
+          {/* Section 2: Mekanisme 3 Poin Utama */}
           <div className="space-y-2">
             <h4 className="font-semibold text-sm text-[#071E49] flex items-center space-x-2">
               <Layers className="w-4 h-4 text-[#071E49]" />
-              <span>2. Mekanisme Stacking & Presisi</span>
+              <span>2. Aturan & Mekanisme Game</span>
             </h4>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-1">
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl space-y-1">
                 <div className="font-semibold text-xs text-[#071E49] flex items-center space-x-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#D1B06C]" />
-                  <span>Perfect Drop (&lt; 0.12u)</span>
+                  <span>Tap / Klik Presisi</span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
-                  Ompreng otomatis terkunci simetris. Membuka kombo multiplier dan efek percikan emas harmonik.
+                  Jatuhkan ompreng pas di tengah. Kalo meleset, pinggirannya bakal kepotong dan ompreng makin menciut.
                 </p>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-1">
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl space-y-1">
                 <div className="font-semibold text-xs text-[#071E49] flex items-center space-x-1.5">
                   <Flame className="w-3.5 h-3.5 text-orange-500" />
-                  <span>Restorasi Baki (Setiap 5 Kombo)</span>
+                  <span>Combo Sempurna</span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
-                  Mencapai kelipatan 5 kombo sempurna berturut-turut akan memulihkan lebar baki ompreng (+0.35 unit).
+                  Tumpuk sempurna berturut-turut buat dapet bonus skor dan balikin ukuran ompreng yang kepotong.
                 </p>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-1">
-                <div className="font-semibold text-xs text-[#071E49]">
-                  ✂️ Pemotongan Presisi
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl space-y-1 sm:col-span-2">
+                <div className="font-semibold text-xs text-[#071E49] flex items-center space-x-1.5">
+                  <Trophy className="w-3.5 h-3.5 text-[#D1B06C]" />
+                  <span>Rebut Spot Puncak #1</span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
-                  Bagian baki yang melewati batas akan terpotong secara gravitasi. Lebar baki berikutnya disesuaikan.
-                </p>
-              </div>
-
-              <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-1">
-                <div className="font-semibold text-xs text-[#071E49]">
-                  👑 Billboard #1 Champion
-                </div>
-                <p className="text-xs text-slate-500 font-normal">
-                  Proyek dengan tumpukan tertinggi berhak menempati Billboard Utama paling atas dengan live link click.
+                  Proyek dengan tumpukan ompreng tertinggi bakal dipajang di billboard utama halaman depan dan mendapatkan exposure klik langsung dari komunitas.
                 </p>
               </div>
             </div>

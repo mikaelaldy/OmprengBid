@@ -22,12 +22,42 @@
         "lastPlayer": { "type": "string" }
       },
       "required": ["id", "name", "url", "handle", "tagline", "category"]
+    },
+    "site_stats": {
+      "title": "Site Stats",
+      "description": "Global website visitors and interaction counters",
+      "type": "object",
+      "properties": {
+        "totalVisitors": { "type": "number" },
+        "totalProjectClicks": { "type": "number" },
+        "totalGamesPlayed": { "type": "number" },
+        "lastUpdated": { "type": "number" }
+      }
+    },
+    "active_visitors": {
+      "title": "Active Visitors",
+      "description": "Real-time presence heartbeats for live visitor counter",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string" },
+        "lastSeen": { "type": "number" }
+      },
+      "required": ["sessionId", "lastSeen"]
     }
   },
   "firestore": {
     "projects": {
       "entity": "projects",
       "description": "Collection storing all submitted projects and their real-time stacking leaderboard scores"
+    },
+    "site_stats": {
+      "entity": "site_stats",
+      "description": "Aggregated site metrics including total visitors and global counters"
+    },
+    "active_visitors": {
+      "entity": "active_visitors",
+      "description": "Ephemeral presence documents for calculating live active visitors"
     }
   }
 }
+

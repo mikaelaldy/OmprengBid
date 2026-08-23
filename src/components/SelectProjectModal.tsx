@@ -120,7 +120,7 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
                       </span>
                     </div>
                     <div className="text-xs text-slate-500 font-mono">
-                      {p.handle} • Rekor: <strong className="text-slate-700 font-semibold">{p.bestScore} baki</strong>
+                      {p.handle} • Rekor: <strong className="text-slate-700 font-semibold">{p.bestScore} ompreng</strong>
                     </div>
                   </div>
                 </div>

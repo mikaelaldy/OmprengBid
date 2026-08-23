@@ -7,7 +7,7 @@ import { sound } from '../utils/audio';
 
 interface GameStageModalProps {
   isOpen: boolean;
-  project: Project;
+  project?: Project | null;
   rank1Project?: Project;
   onClose: () => void;
   onGameOver: (stats: {
@@ -59,17 +59,19 @@ export const GameStageModal: React.FC<GameStageModalProps> = ({
           <div>
             <div className="flex items-center space-x-1.5">
               <span className="text-[11px] text-slate-400">
-                Memperkokoh:
+                {project ? 'Dukung:' : 'Mode Arcade:'}
               </span>
               <span className="font-semibold text-sm text-white truncate max-w-[140px] sm:max-w-[260px]">
-                {project.name}
+                {project ? project.name : 'Sesi Main Bebas (Pecahkan Rekor)'}
               </span>
-              {project.verified && (
+              {project?.verified && (
                 <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C]" />
               )}
             </div>
             <div className="text-[10px] text-slate-400 font-mono">
-              Builder: {project.handle} • Rekor: {project.bestScore} baki
+              {project 
+                ? `Builder: ${project.handle} • Rekor: ${project.bestScore} ompreng`
+                : 'Target Rekor #1: ' + (rank1Project ? `${rank1Project.bestScore} ompreng (${rank1Project.name})` : '48 ompreng')}
             </div>
           </div>
         </div>

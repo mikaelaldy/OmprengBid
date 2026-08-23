@@ -46,7 +46,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="flex items-center space-x-2.5">
             <Award className="w-5 h-5 text-[#D1B06C]" />
             <h3 className="text-sm sm:text-base font-bold">
-              Sertifikat Keunggulan Presisi Menara Ompreng
+              Kartu Bukti Rekor Tumpukan Ompreng
             </h3>
           </div>
           <button
@@ -75,24 +75,24 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 OB
               </div>
               <div className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">
-                KOMPETISI MENARA BAKI INDONESIA
+                KOMUNITAS BUILDER INDONESIA
               </div>
               <div className="text-sm font-bold tracking-wide text-[#071E49]">
-                OMPRENGBID LEADERBOARD & ARCADE
+                OMPRENGBID LEADERBOARD & SHOWCASE
               </div>
               <div className="text-[10px] text-[#D1B06C] font-semibold">
-                PRESTASI PRESET TUMPURAN BUILDER DIGITAL
+                BUKTI KETANGKASAN & DAYA TAHAN PROYEK
               </div>
             </div>
 
             {/* Certificate Body */}
             <div className="my-5 border-t border-b border-slate-200 py-4 space-y-2">
               <div className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                SERTIFIKAT PRESISI MENARA OMPRENG
+                KARTU BUKTI REKOR OMPRENG
               </div>
               
               <div className="text-xs text-slate-600 font-normal">
-                Diberikan sebagai pengakuan atas pencapaian tumpukan presisi menara Ompreng untuk proyek:
+                Diberikan sebagai pengakuan atas pencapaian tumpukan presisi menara ompreng untuk proyek:
               </div>
 
               <div className="text-xl sm:text-2xl font-bold text-[#071E49]">
@@ -105,10 +105,10 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
               <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl inline-block mx-auto mt-2">
                 <div className="text-2xl sm:text-3xl font-bold font-mono text-[#071E49]">
-                  {score} <span className="text-sm font-normal text-slate-600 font-sans">baki Ompreng</span>
+                  {score} <span className="text-sm font-normal text-slate-600 font-sans">ompreng</span>
                 </div>
                 <div className="text-xs text-slate-500 font-mono mt-0.5">
-                  Tinggi Menara: <strong className="text-slate-800">{heightMeters} Meter</strong>
+                  Ketinggian Menara: <strong className="text-slate-800">{heightMeters} Meter</strong>
                 </div>
               </div>
             </div>

@@ -262,7 +262,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                     {/* Highest Stack Score */}
                     <td className="py-3.5 px-4 text-right">
                       <div className="font-mono font-bold text-sm sm:text-base text-[#071E49]">
-                        {scoreToShow} <span className="text-xs font-normal text-slate-500 font-sans">baki</span>
+                        {scoreToShow} <span className="text-xs font-normal text-slate-500 font-sans">ompreng</span>
                       </div>
                       <div className="text-[11px] text-slate-400 font-mono">
                         ≈ {(scoreToShow * 0.045).toFixed(2)}m

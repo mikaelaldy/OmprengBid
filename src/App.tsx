@@ -20,15 +20,27 @@ import {
   subscribeToGlobalProjects,
   recordGameRun,
   getStoredPlayerHandle,
+  trackUniqueSessionVisit,
+  startLiveVisitorHeartbeat,
+  subscribeToSiteStats,
+  SiteStats,
 } from './utils/storage';
-import { Trophy, ShieldCheck, Sparkles, Layers, Award, Play, Flame, ExternalLink, HelpCircle, Cloud } from 'lucide-react';
+import { Trophy, Sparkles, ExternalLink } from 'lucide-react';
 import { trackGameStart, trackGameOver } from './lib/analytics';
 
 export default function App() {
 
   const [projects, setProjects] = useState<Project[]>(() => loadCachedProjects());
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [pendingInitialScore, setPendingInitialScore] = useState<number | undefined>(undefined);
   const [isConnectedToCloud, setIsConnectedToCloud] = useState<boolean>(false);
+  const [liveVisitors, setLiveVisitors] = useState<number>(1);
+  const [siteStats, setSiteStats] = useState<SiteStats>({
+    totalVisitors: 1,
+    totalProjectClicks: 0,
+    totalGamesPlayed: 0,
+    lastUpdated: Date.now(),
+  });
   
   // Modal states
   const [isGaming, setIsGaming] = useState<boolean>(false);
@@ -46,10 +58,30 @@ export default function App() {
     maxCombo: number;
     perfectDrops: number;
     heightMeters: number;
-    project: Project;
+    project: Project | null;
     isNewRank1: boolean;
     currentRank: number;
   } | null>(null);
+
+  // Track session visit on mount and initiate live presence
+  useEffect(() => {
+    trackUniqueSessionVisit();
+    
+    // Live visitors heartbeat listener
+    const unsubscribeHeartbeat = startLiveVisitorHeartbeat((count) => {
+      setLiveVisitors(count);
+    });
+
+    // Site stats subscription
+    const unsubscribeStats = subscribeToSiteStats((stats) => {
+      setSiteStats(stats);
+    });
+
+    return () => {
+      unsubscribeHeartbeat();
+      unsubscribeStats();
+    };
+  }, []);
 
   // Subscribe to real-time global projects from Firestore
   useEffect(() => {
@@ -73,10 +105,11 @@ export default function App() {
     return sorted[0];
   }, [projects]);
 
-  // Launch Game for a specific project
-  const handleStartGame = (project: Project) => {
-    trackGameStart(project.name, project.id);
-    setActiveProject(project);
+  // Launch Game for a specific project or in free play-first mode
+  const handleStartGame = (project?: Project | null) => {
+    const proj = project || null;
+    trackGameStart(proj ? proj.name : 'Free Play', proj ? proj.id : 'free_play');
+    setActiveProject(proj);
     setIsGaming(true);
     setIsGameOverOpen(false);
   };
@@ -94,21 +127,46 @@ export default function App() {
     perfectDrops: number;
     heightMeters: number;
   }) => {
-    if (!activeProject) return;
-
-    const playerHandle = getStoredPlayerHandle() || activeProject.handle;
     const scoreVal = stats.traysStacked || stats.score;
 
-    try {
-      const { updatedProject, isNewRank1, rank } = await recordGameRun(
-        activeProject,
-        scoreVal,
-        playerHandle,
-        projects
-      );
+    if (activeProject) {
+      const playerHandle = getStoredPlayerHandle() || activeProject.handle;
+
+      try {
+        const { updatedProject, isNewRank1, rank } = await recordGameRun(
+          activeProject,
+          scoreVal,
+          playerHandle,
+          projects
+        );
+
+        trackGameOver({
+          projectName: updatedProject.name,
+          score: scoreVal,
+          traysStacked: stats.traysStacked,
+          maxCombo: stats.maxCombo,
+          perfectDrops: stats.perfectDrops,
+          isNewRank1,
+        });
+
+        setActiveProject(updatedProject);
+        setLastGameResult({
+          ...stats,
+          project: updatedProject,
+          isNewRank1,
+          currentRank: rank,
+        });
+      } catch (e) {
+        console.error('Error saving score to Firestore:', e);
+      }
+    } else {
+      // Free play mode: Calculate estimated rank in leaderboard
+      const higherCount = projects.filter((p) => p.bestScore >= scoreVal).length;
+      const estimatedRank = higherCount + 1;
+      const isNewRank1 = rank1Project ? scoreVal > rank1Project.bestScore : true;
 
       trackGameOver({
-        projectName: updatedProject.name,
+        projectName: 'Free Play Session',
         score: scoreVal,
         traysStacked: stats.traysStacked,
         maxCombo: stats.maxCombo,
@@ -116,42 +174,51 @@ export default function App() {
         isNewRank1,
       });
 
-      setActiveProject(updatedProject);
       setLastGameResult({
         ...stats,
-        project: updatedProject,
+        project: null,
         isNewRank1,
-        currentRank: rank,
+        currentRank: estimatedRank,
       });
-    } catch (e) {
-      console.error('Error saving score to Firestore:', e);
     }
 
     setIsGaming(false);
     setIsGameOverOpen(true);
   };
 
-  // Replay with the same project
+  // Replay with the same project or free mode
   const handlePlayAgain = () => {
-    if (activeProject) {
-      setIsGameOverOpen(false);
-      setIsGaming(true);
-    }
+    setIsGameOverOpen(false);
+    setIsGaming(true);
+  };
+
+  // Handle claim score & register a new project
+  const handleClaimScoreAndRegister = (score: number) => {
+    setIsGameOverOpen(false);
+    setPendingInitialScore(score);
+    setIsSubmitModalOpen(true);
   };
 
   // Handle new project submission
   const handleNewProjectCreated = (newProj: Project) => {
-    handleStartGame(newProj);
+    setActiveProject(newProj);
+    setPendingInitialScore(undefined);
+    setIsCertificateOpen(true);
   };
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col text-[#071E49]">
       {/* 1. Official Header */}
       <Header
-        onOpenSubmit={() => setIsSubmitModalOpen(true)}
+        onOpenSubmit={() => {
+          setPendingInitialScore(undefined);
+          setIsSubmitModalOpen(true);
+        }}
         onOpenRegulations={() => setIsRegulationsOpen(true)}
         onOpenTutorial={() => setIsTutorialOpen(true)}
-        totalProjectsCount={projects.length}
+        onStartGame={() => handleStartGame(null)}
+        liveVisitors={liveVisitors}
+        totalVisitors={siteStats.totalVisitors}
       />
 
       {/* Main Container */}
@@ -189,82 +256,12 @@ export default function App() {
           </div>
         )}
 
-        {/* Quick Stacking Action Bar / Stats Strip */}
-        <div className="bg-white border border-slate-200 p-4 sm:p-5 rounded-2xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-3.5 text-xs sm:text-sm">
-            <div className="w-10 h-10 rounded-xl bg-slate-50 text-[#D1B06C] flex items-center justify-center border border-slate-200">
-              <Layers className="w-5 h-5 text-[#071E49]" />
-            </div>
-            <div>
-              <div className="font-semibold text-[#071E49] text-sm sm:text-base">
-                Kompetisi Menara Baki Ompreng 2.5D
-              </div>
-              <div className="text-xs text-slate-500">
-                Presisi potong mekanikal • Drop <span className="font-mono text-[#071E49] font-medium">&lt; 0.12u</span> untuk kombo & restorasi ukuran baki
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2.5 w-full sm:w-auto">
-            <button
-              id="btn-quick-play-random"
-              onClick={() => {
-                if (projects.length === 0) {
-                  setIsSubmitModalOpen(true);
-                } else {
-                  handleOpenSelectProject();
-                }
-              }}
-              className="w-full sm:w-auto bg-[#071E49] hover:bg-[#0c2a63] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95"
-            >
-              <Play className="w-4 h-4 text-[#D1B06C] fill-current" />
-              <span>{projects.length === 0 ? 'Daftar Proyek & Mulai Main' : 'Mulai Main & Boost Proyek'}</span>
-            </button>
-          </div>
-        </div>
-
         {/* 3. Main Leaderboard Section */}
         <LeaderboardTable
           projects={projects}
           onPlayProject={handleStartGame}
           onOpenSubmit={() => setIsSubmitModalOpen(true)}
         />
-
-        {/* Institutional Mission Narrative */}
-        <div className="bg-[#071E49] text-white p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-md relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            <div className="md:col-span-2 space-y-3">
-              <div className="inline-flex items-center space-x-1.5 bg-slate-800 text-[#D1B06C] px-3 py-1 rounded-full text-xs font-medium border border-slate-700">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Kompetisi Tech Builders & Indie Hackers</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
-                Membangun Ekosistem Digital Indonesia yang Kokoh & Presisi
-              </h3>
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-2xl">
-                OmprengBid mempertemukan para tech builder, software engineer, dan startup founder di seluruh Nusantara. Menara baki ompreng stainless steel ini melambangkan kekokohan fondasi, ketelitian kode, dan semangat gotong royong digital anak bangsa.
-              </p>
-            </div>
-
-            <div className="bg-slate-800/60 border border-slate-700 p-5 rounded-xl text-center space-y-2">
-              <div className="text-xs text-[#D1B06C] font-medium">
-                Material Baki Ompreng
-              </div>
-              <div className="text-2xl font-bold text-white font-mono">
-                SUS 304 • 5 Sekat
-              </div>
-              <div className="text-xs text-slate-300">
-                Presisi 60 FPS • Stainless Steel
-              </div>
-              <button
-                onClick={() => setIsRegulationsOpen(true)}
-                className="text-xs text-[#D1B06C] hover:underline block mx-auto pt-1 font-medium"
-              >
-                Pelajari Regulasi Lengkap →
-              </button>
-            </div>
-          </div>
-        </div>
 
       </main>
 
@@ -338,30 +335,28 @@ export default function App() {
         onClose={() => setIsTutorialOpen(false)}
         onStartGame={() => {
           setIsTutorialOpen(false);
-          if (projects.length > 0) {
-            handleStartGame(projects[0]);
-          } else {
-            setIsSubmitModalOpen(true);
-          }
+          handleStartGame(null);
         }}
         isPreGame={false}
       />
 
       {/* 1. Fullscreen / Dedicated Arcade 2.5D Game Stage */}
-      {activeProject && (
-        <GameStageModal
-          isOpen={isGaming}
-          project={activeProject}
-          rank1Project={rank1Project || undefined}
-          onClose={() => setIsGaming(false)}
-          onGameOver={handleGameOver}
-        />
-      )}
+      <GameStageModal
+        isOpen={isGaming}
+        project={activeProject}
+        rank1Project={rank1Project || undefined}
+        onClose={() => setIsGaming(false)}
+        onGameOver={handleGameOver}
+      />
 
       {/* 2. Submit New Project Modal */}
       <SubmitProjectModal
         isOpen={isSubmitModalOpen}
-        onClose={() => setIsSubmitModalOpen(false)}
+        initialScore={pendingInitialScore}
+        onClose={() => {
+          setIsSubmitModalOpen(false);
+          setPendingInitialScore(undefined);
+        }}
         onSuccess={handleNewProjectCreated}
       />
 
@@ -374,7 +369,10 @@ export default function App() {
           setIsSelectModalOpen(false);
           handleStartGame(p);
         }}
-        onOpenSubmit={() => setIsSubmitModalOpen(true)}
+        onOpenSubmit={() => {
+          setPendingInitialScore(undefined);
+          setIsSubmitModalOpen(true);
+        }}
       />
 
       {/* 4. Game Over Modal */}
@@ -394,9 +392,16 @@ export default function App() {
             setIsGameOverOpen(false);
             setIsSelectModalOpen(true);
           }}
+          onRegisterProject={handleClaimScoreAndRegister}
+          onBoostExistingProject={() => {
+            setIsGameOverOpen(false);
+            setIsSelectModalOpen(true);
+          }}
           onOpenCertificate={() => {
             setIsGameOverOpen(false);
-            setIsCertificateOpen(true);
+            if (activeProject) {
+              setIsCertificateOpen(true);
+            }
           }}
           onClose={() => setIsGameOverOpen(false)}
         />
@@ -410,7 +415,7 @@ export default function App() {
           project={activeProject}
           score={lastGameResult?.score || activeProject.bestScore}
           heightMeters={lastGameResult?.heightMeters || +(activeProject.bestScore * 0.045).toFixed(2)}
-          playerHandle={lastGameResult?.project.lastPlayer || activeProject.lastPlayer || activeProject.handle}
+          playerHandle={lastGameResult?.project?.lastPlayer || activeProject.lastPlayer || activeProject.handle}
         />
       )}
 
