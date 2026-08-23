@@ -56,19 +56,19 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
   };
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+    <div className="bg-white border border-black/10 rounded-lg shadow-xs overflow-hidden">
       {/* Table Header & Controls */}
-      <div className="p-4 sm:p-6 border-b border-slate-200 bg-slate-50/70">
+      <div className="p-4 sm:p-6 border-b border-black/10 bg-black/[0.02]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           
           {/* Header Title & Tabs */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#071E49]">
+            <h2 className="text-xl sm:text-2xl font-bold text-black">
               Papan Peringkat
             </h2>
 
             {/* Tabs: Today vs All-time */}
-            <div className="inline-flex p-1 bg-slate-200/80 rounded-lg self-start">
+            <div className="inline-flex p-1 bg-black/[0.08] rounded-lg self-start">
               <button
                 id="tab-today-battle"
                 onClick={() => {
@@ -77,11 +77,11 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                 }}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center space-x-1.5 ${
                   tab === 'today'
-                    ? 'bg-[#071E49] text-[#D1B06C] shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-black text-black/60 shadow-xs'
+                    : 'text-black/65 hover:text-black'
                 }`}
               >
-                <Flame className={`w-3.5 h-3.5 ${tab === 'today' ? 'text-[#D1B06C]' : 'text-orange-500'}`} />
+                <Flame className={`w-3.5 h-3.5 ${tab === 'today' ? '' : 'text-black/35'}`} />
                 <span>Hari Ini</span>
               </button>
 
@@ -93,11 +93,11 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                 }}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center space-x-1.5 ${
                   tab === 'alltime'
-                    ? 'bg-[#071E49] text-[#D1B06C] shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-black text-black/60 shadow-xs'
+                    : 'text-black/65 hover:text-black'
                 }`}
               >
-                <Trophy className={`w-3.5 h-3.5 ${tab === 'alltime' ? 'text-[#D1B06C]' : 'text-amber-500'}`} />
+                <Trophy className={`w-3.5 h-3.5 ${tab === 'alltime' ? '' : 'text-black/35'}`} />
                 <span>Sepanjang Masa</span>
               </button>
             </div>
@@ -105,22 +105,22 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
 
           {/* Search Box */}
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-black/45" />
             <input
               id="input-search-leaderboard"
               type="text"
               placeholder="Cari proyek atau @handle builder..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:border-[#071E49] transition"
+              className="w-full bg-white border border-black/10 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-black placeholder-black/35 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:border-black/30 transition"
             />
           </div>
         </div>
 
         {/* Category Pills Filter */}
         <div className="flex items-center space-x-2 overflow-x-auto pt-4 pb-1 no-scrollbar text-xs">
-          <span className="text-slate-500 font-medium text-xs shrink-0 flex items-center space-x-1">
-            <Filter className="w-3.5 h-3.5 text-[#D1B06C]" />
+          <span className="text-black/55 font-medium text-xs shrink-0 flex items-center space-x-1">
+            <Filter className="w-3.5 h-3.5 text-black/60" />
             <span>Kategori:</span>
           </span>
           {CATEGORIES.map((cat) => (
@@ -132,8 +132,8 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
               }}
               className={`px-3 py-1 rounded-full font-medium text-xs transition shrink-0 ${
                 selectedCategory === cat
-                  ? 'bg-[#071E49] text-[#D1B06C] shadow-xs'
-                  : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
+                  ? 'bg-black text-black/60 shadow-xs'
+                  : 'bg-white text-black/65 hover:text-black border border-black/10'
               }`}
             >
               {cat === 'ALL' ? 'Semua Kategori' : cat}
@@ -146,7 +146,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-700 bg-[#071E49] text-xs font-semibold text-[#E5D5B4]">
+            <tr className="border-b border-black/10 bg-white text-xs font-semibold text-black/55">
               <th className="py-3 px-4 text-center w-16">Peringkat</th>
               <th className="py-3 px-4">Proyek & Inovasi</th>
               <th className="py-3 px-4 hidden md:table-cell">Builder Handle</th>
@@ -158,14 +158,14 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
               <th className="py-3 px-4 text-center w-28">Aksi</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-xs sm:text-sm font-normal">
+          <tbody className="divide-y divide-black/[0.08] text-xs sm:text-sm font-normal">
             {filteredProjects.length === 0 ? (
               <tr>
-                <td colSpan={7} className="py-12 text-center text-slate-500">
+                <td colSpan={7} className="py-12 text-center text-black/55">
                   <p className="font-medium text-sm">Tidak ada proyek yang sesuai pencarian.</p>
                   <button
                     onClick={onOpenSubmit}
-                    className="mt-3 text-xs text-[#071E49] font-semibold underline hover:text-[#0c2a63]"
+                    className="mt-3 text-xs text-black font-semibold underline hover:text-black/70"
                   >
                     Daftarkan proyek baru sekarang
                   </button>
@@ -179,32 +179,32 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                 return (
                   <tr
                     key={p.id}
-                    className={`hover:bg-slate-50 transition group ${
+                    className={`hover:bg-black/[0.03] transition group ${
                       rank === 1
-                        ? 'bg-amber-50/40'
+                        ? ''
                         : rank === 2
-                        ? 'bg-slate-50/60'
+                        ? ''
                         : rank === 3
-                        ? 'bg-amber-50/20'
+                        ? ''
                         : ''
                     }`}
                   >
                     {/* Rank Badge */}
                     <td className="py-3.5 px-4 text-center">
                       {rank === 1 ? (
-                        <div className="w-7 h-7 mx-auto rounded-full bg-[#D1B06C] text-[#071E49] flex items-center justify-center font-bold text-xs shadow-xs">
+                        <div className="w-7 h-7 mx-auto rounded-full bg-[#D1B06C] text-black flex items-center justify-center font-bold text-xs">
                           1
                         </div>
                       ) : rank === 2 ? (
-                        <div className="w-7 h-7 mx-auto rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xs">
+                        <div className="w-7 h-7 mx-auto rounded-full bg-black/[0.08] text-black/70 flex items-center justify-center font-bold text-xs">
                           2
                         </div>
                       ) : rank === 3 ? (
-                        <div className="w-7 h-7 mx-auto rounded-full bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-xs">
+                        <div className="w-7 h-7 mx-auto rounded-full bg-[#D1B06C]/25 text-black/70 flex items-center justify-center font-bold text-xs">
                           3
                         </div>
                       ) : (
-                        <div className="w-7 h-7 mx-auto text-slate-400 font-mono text-xs flex items-center justify-center">
+                        <div className="w-7 h-7 mx-auto text-black/45 font-mono text-xs flex items-center justify-center">
                           {rank}
                         </div>
                       )}
@@ -221,31 +221,31 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={() => handleExternalClick(p)}
-                              className="font-semibold text-sm sm:text-base text-[#071E49] hover:text-blue-700 flex items-center space-x-1"
+                              className="font-semibold text-sm sm:text-base text-black hover:underline underline-offset-2 flex items-center space-x-1"
                             >
                               <span>{p.name}</span>
-                              <ExternalLink className="w-3 h-3 text-slate-400 group-hover:text-blue-600 transition" />
+                              <ExternalLink className="w-3 h-3 text-black/45 group-hover:text-black/60 transition" />
                             </a>
 
                             {p.verified && (
                               <span
                                 title="Terverifikasi"
-                                className="text-[#D1B06C]"
+                                className="text-black/60"
                               >
                                 <ShieldCheck className="w-3.5 h-3.5" />
                               </span>
                             )}
 
-                            <span className="bg-slate-100 text-slate-700 text-[10px] px-2 py-0.5 rounded-full font-medium">
+                            <span className="bg-black/[0.05] text-black/75 text-[10px] px-2 py-0.5 rounded-full font-medium">
                               {p.category}
                             </span>
                           </div>
 
-                          <p className="text-xs text-slate-500 font-normal line-clamp-1 max-w-md mt-0.5">
+                          <p className="text-xs text-black/55 font-normal line-clamp-1 max-w-md mt-0.5">
                             {p.tagline}
                           </p>
 
-                          <div className="md:hidden text-xs text-slate-500 font-mono mt-0.5">
+                          <div className="md:hidden text-xs text-black/55 font-mono mt-0.5">
                             {p.handle}
                           </div>
                         </div>
@@ -254,30 +254,30 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
 
                     {/* Builder Handle */}
                     <td className="py-3.5 px-4 hidden md:table-cell">
-                      <span className="font-mono text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
+                      <span className="font-mono text-xs text-black/65 bg-black/[0.05] px-2 py-0.5 rounded">
                         {p.handle}
                       </span>
                     </td>
 
                     {/* Highest Stack Score */}
                     <td className="py-3.5 px-4 text-right">
-                      <div className="font-mono font-bold text-sm sm:text-base text-[#071E49]">
-                        {scoreToShow} <span className="text-xs font-normal text-slate-500 font-sans">ompreng</span>
+                      <div className="font-mono font-bold text-sm sm:text-base text-black">
+                        {scoreToShow} <span className="text-xs font-normal text-black/55 font-sans">ompreng</span>
                       </div>
-                      <div className="text-[11px] text-slate-400 font-mono">
+                      <div className="text-[11px] text-black/45 font-mono">
                         ≈ {(scoreToShow * 0.045).toFixed(2)}m
                       </div>
                     </td>
 
                     {/* Total Runs */}
-                    <td className="py-3.5 px-4 text-right hidden sm:table-cell font-mono text-xs text-slate-500">
+                    <td className="py-3.5 px-4 text-right hidden sm:table-cell font-mono text-xs text-black/55">
                       {p.runsCount}x
                     </td>
 
                     {/* Clicks */}
-                    <td className="py-3.5 px-4 text-right hidden lg:table-cell font-mono text-xs text-slate-500">
+                    <td className="py-3.5 px-4 text-right hidden lg:table-cell font-mono text-xs text-black/55">
                       <div className="flex items-center justify-end space-x-1">
-                        <MousePointerClick className="w-3.5 h-3.5 text-[#D1B06C]" />
+                        <MousePointerClick className="w-3.5 h-3.5 text-black/40" />
                         <span>{p.clicksCount}</span>
                       </div>
                     </td>
@@ -290,9 +290,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                           sound.playClick();
                           onPlayProject(p);
                         }}
-                        className="bg-slate-100 hover:bg-[#071E49] hover:text-white text-[#071E49] text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-200 hover:border-[#071E49] shadow-xs flex items-center justify-center space-x-1 w-full transition active:scale-95"
+                        className="bg-black/[0.05] hover:bg-black hover:text-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border border-black/10 hover:border-[#071E49] shadow-xs flex items-center justify-center space-x-1 w-full transition active:scale-95"
                       >
-                        <Play className="w-3 h-3 text-[#D1B06C] fill-current" />
+                        <Play className="w-3 h-3 fill-current" />
                         <span>Main</span>
                       </button>
                     </td>
@@ -305,12 +305,12 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
       </div>
 
       {/* Institutional Table Footer & Full-Width CTA */}
-      <div className="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 space-y-3">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <div className="p-4 sm:p-6 bg-black/[0.02] border-t border-black/10 space-y-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-black/55">
           <div>
-            Menampilkan <strong className="text-slate-800 font-semibold">{filteredProjects.length}</strong> proyek inovasi teknologi di OmprengBid.
+            Menampilkan <strong className="text-black font-semibold">{filteredProjects.length}</strong> proyek inovasi teknologi di OmprengBid.
           </div>
-          <div className="text-xs text-slate-400">
+          <div className="text-xs text-black/45">
             Engine 60 FPS • Material SUS 304 Stainless Steel
           </div>
         </div>
@@ -318,9 +318,9 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
         {/* Action CTA Button */}
         <button
           onClick={onOpenSubmit}
-          className="w-full bg-white hover:bg-slate-50 text-[#071E49] border border-slate-300 font-medium py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xs"
+          className="w-full bg-white hover:bg-black/[0.03] text-black border border-black/18 font-medium py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition shadow-xs"
         >
-          <Plus className="w-4 h-4 text-[#D1B06C]" />
+          <Plus className="w-4 h-4 text-black/60" />
           <span>Daftarkan Proyek / Startup Baru</span>
         </button>
       </div>

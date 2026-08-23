@@ -24,18 +24,18 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#071E49] via-[#0B2556] to-[#071E49] border border-slate-700/70 rounded-2xl shadow-sm text-white">
+    <div className="relative overflow-hidden bg-white border border-black/15 rounded-lg">
       {/* Top Banner Ribbon */}
-      <div className="bg-[#051636]/90 text-slate-300 px-5 py-2.5 flex items-center justify-between text-xs border-b border-slate-800">
+      <div className="bg-black/[0.03] px-5 py-2.5 flex items-center justify-between text-xs border-b border-black/10">
         <div className="flex items-center space-x-2">
-          <Flame className="w-3.5 h-3.5 text-orange-400" />
-          <span className="font-semibold text-slate-100 tracking-wide">SPOT UTAMA #1</span>
+          <Flame className="w-3.5 h-3.5 text-black/60" />
+          <span className="font-semibold text-black tracking-wide">Spot utama #1</span>
         </div>
         <div className="flex items-center space-x-2 text-xs">
-          <span className="hidden sm:inline text-slate-400">
+          <span className="hidden sm:inline text-black/50">
             Didukung builder komunitas dengan rekor {rank1Project.bestScore} ompreng
           </span>
-          <span className="bg-[#D1B06C]/10 text-[#D1B06C] border border-[#D1B06C]/30 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+          <span className="bg-black/[0.04] text-black/60 border border-black/10 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
             Live #1
           </span>
         </div>
@@ -49,17 +49,17 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
           <div className="lg:col-span-8 space-y-3.5">
             {/* Badges & Category */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="bg-slate-800/80 border border-slate-700 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
-                <CrownIcon className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <span className="bg-[#D1B06C] text-black text-xs font-semibold px-2.5 py-1 rounded-md flex items-center space-x-1.5">
+                <CrownIcon className="w-3.5 h-3.5 text-black" />
                 <span>Juara Bertahan</span>
               </span>
 
-              <span className="bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-md">
+              <span className="bg-white border border-black/15 text-black/70 text-xs font-medium px-2.5 py-1 rounded-md">
                 {rank1Project.category}
               </span>
 
               {rank1Project.verified && (
-                <span className="bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1">
+                <span className="border border-black/15 text-black/70 text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>Katalog Terverifikasi</span>
                 </span>
@@ -69,14 +69,14 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
             {/* Project Title & Tagline */}
             <div>
               <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight">
                   {rank1Project.name}
                 </h2>
-                <span className="text-[#D1B06C] font-mono text-sm font-medium">
+                <span className="text-black/50 font-mono text-sm font-medium">
                   {rank1Project.handle}
                 </span>
               </div>
-              <p className="text-slate-300 text-sm font-normal mt-1.5 max-w-2xl leading-relaxed">
+              <p className="text-black/60 text-sm font-normal mt-1.5 max-w-2xl leading-relaxed">
                 {rank1Project.tagline}
               </p>
             </div>
@@ -84,42 +84,42 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
             {/* Key Metrics Grid */}
             <div className="flex flex-wrap items-center gap-3 pt-1">
               {/* Best Score */}
-              <div className="bg-slate-800/60 border border-slate-700/80 px-3.5 py-2 rounded-xl">
-                <div className="text-[11px] text-slate-400 font-medium">
+              <div className="bg-black/[0.03] border border-black/10 px-3.5 py-2 rounded-lg">
+                <div className="text-[11px] text-black/50 font-medium">
                   Rekor Menara
                 </div>
-                <div className="text-xl sm:text-2xl font-bold text-white font-mono flex items-baseline space-x-1 mt-0.5">
+                <div className="text-xl sm:text-2xl font-bold text-black font-mono flex items-baseline space-x-1 mt-0.5">
                   <span>{rank1Project.bestScore}</span>
-                  <span className="text-xs text-[#D1B06C] font-sans font-medium">Ompreng</span>
+                  <span className="text-xs text-black/50 font-sans font-medium">Ompreng</span>
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
+                <div className="text-[11px] text-black/45 font-mono">
                   ≈ {(rank1Project.bestScore * 0.045).toFixed(2)}m
                 </div>
               </div>
 
               {/* Total Runs */}
-              <div className="bg-slate-800/60 border border-slate-700/80 px-3.5 py-2 rounded-xl">
-                <div className="text-[11px] text-slate-400 font-medium">
+              <div className="bg-black/[0.03] border border-black/10 px-3.5 py-2 rounded-lg">
+                <div className="text-[11px] text-black/50 font-medium">
                   Total Ronde
                 </div>
-                <div className="text-xl sm:text-2xl font-bold text-white font-mono mt-0.5">
+                <div className="text-xl sm:text-2xl font-bold text-black font-mono mt-0.5">
                   {rank1Project.runsCount}
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
+                <div className="text-[11px] text-black/45 font-mono">
                   permainan
                 </div>
               </div>
 
               {/* Live Clicks */}
-              <div className="bg-slate-800/60 border border-slate-700/80 px-3.5 py-2 rounded-xl">
-                <div className="text-[11px] text-slate-400 font-medium flex items-center space-x-1">
-                  <MousePointerClick className="w-3 h-3 text-[#D1B06C]" />
+              <div className="bg-black/[0.03] border border-black/10 px-3.5 py-2 rounded-lg">
+                <div className="text-[11px] text-black/50 font-medium flex items-center space-x-1">
+                  <MousePointerClick className="w-3 h-3 text-black/40" />
                   <span>Kunjungan Link</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-bold text-[#D1B06C] font-mono mt-0.5">
+                <div className="text-xl sm:text-2xl font-bold text-black/60 font-mono mt-0.5">
                   {rank1Project.clicksCount}
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
+                <div className="text-[11px] text-black/45 font-mono">
                   klik langsung
                 </div>
               </div>
@@ -135,9 +135,9 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
                 sound.playClick();
                 onPlayProject();
               }}
-              className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold text-xs sm:text-sm px-4 py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+              className="w-full bg-black hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm px-4 py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 text-center"
             >
-              <Play className="w-4 h-4 fill-current text-[#071E49]" />
+              <Play className="w-4 h-4 fill-current text-white" />
               <span>Main Sekarang & Tantang #1</span>
             </button>
 
@@ -148,10 +148,10 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleExternalClick}
-              className="w-full bg-white/10 hover:bg-white/20 text-white font-medium text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-white/20 shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+              className="w-full bg-white hover:bg-black/[0.04] text-black font-medium text-xs sm:text-sm px-4 py-2.5 rounded-lg border border-black/15 flex items-center justify-center space-x-2 transition active:scale-95 text-center"
             >
               <span>Kunjungi {rank1Project.name}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <ExternalLink className="w-3.5 h-3.5 text-black/50" />
             </a>
 
             {/* Boost Rank 1 directly or Select other project */}
@@ -159,7 +159,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               <button
                 id="btn-boost-rank1-directly"
                 onClick={() => onPlayProject(rank1Project)}
-                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95 truncate"
+                className="bg-white hover:bg-black/[0.04] text-black/70 hover:text-black font-medium text-[11px] px-2.5 py-2 rounded-lg border border-black/15 flex items-center justify-center space-x-1 transition active:scale-95 truncate"
               >
                 <span>Dukung #{rank1Project.name}</span>
               </button>
@@ -167,7 +167,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               <button
                 id="btn-choose-other-project"
                 onClick={onSelectProject}
-                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95"
+                className="bg-white hover:bg-black/[0.04] text-black/70 hover:text-black font-medium text-[11px] px-2.5 py-2 rounded-lg border border-black/15 flex items-center justify-center space-x-1 transition active:scale-95"
               >
                 <span>Pilih Proyek Lain</span>
               </button>

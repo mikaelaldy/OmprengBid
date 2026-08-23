@@ -31,37 +31,37 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#071E49]/70 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] flex flex-col border border-slate-200 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-150">
+      <div className="bg-white rounded-lg max-w-lg w-full max-h-[85vh] flex flex-col border border-black/10 shadow-xl overflow-hidden">
         
         {/* Header */}
-        <div className="bg-[#071E49] text-white p-5 sm:p-6 flex items-center justify-between border-b border-slate-700 shrink-0">
+        <div className="bg-white text-black p-5 sm:p-6 flex items-center justify-between border-b border-black/10 shrink-0 shrink-0">
           <div>
             <h3 className="text-base sm:text-lg font-bold">
               Pilih Proyek untuk Di-Boost
             </h3>
-            <p className="text-xs text-[#D1B06C]">
+            <p className="text-xs text-black/50">
               Skor tumpukanmu akan menambah rekor proyek pilihanmu
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition"
+            className="text-black/45 hover:text-black p-1.5 rounded-lg hover:bg-black/[0.05] transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search Bar & Action */}
-        <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center gap-2.5 shrink-0">
+        <div className="p-4 border-b border-black/10 bg-black/[0.02] flex items-center gap-2.5 shrink-0">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-black/40" />
             <input
               type="text"
               placeholder="Cari nama atau @handle..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:border-[#071E49]"
+              className="w-full bg-white border border-black/10 rounded-xl pl-9 pr-3 py-2 text-xs sm:text-sm text-black placeholder-black/35 focus:outline-none focus:ring-2 focus:ring-black/25 focus:border-black/30"
             />
           </div>
 
@@ -70,24 +70,24 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
               onClose();
               onOpenSubmit();
             }}
-            className="bg-[#071E49] hover:bg-[#0c2a63] text-white text-xs font-medium px-3.5 py-2 rounded-xl flex items-center space-x-1.5 shrink-0 transition"
+            className="bg-black hover:bg-neutral-800 text-white text-xs font-medium px-3.5 py-2 rounded-lg flex items-center space-x-1.5 shrink-0 transition"
           >
-            <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <Plus className="w-3.5 h-3.5 text-white" />
             <span className="hidden sm:inline">Proyek Baru</span>
           </button>
         </div>
 
         {/* Project List */}
-        <div className="overflow-y-auto p-4 space-y-2 flex-1 divide-y divide-slate-100">
+        <div className="overflow-y-auto p-4 space-y-2 flex-1 divide-y divide-black/[0.08]">
           {filtered.length === 0 ? (
-            <div className="py-8 text-center text-slate-500">
+            <div className="py-8 text-center text-black/55">
               <p className="text-sm font-medium">Proyek tidak ditemukan.</p>
               <button
                 onClick={() => {
                   onClose();
                   onOpenSubmit();
                 }}
-                className="mt-2 text-xs font-semibold text-[#071E49] underline hover:text-[#0c2a63]"
+                className="mt-2 text-xs font-semibold text-black underline underline-offset-2"
               >
                 Daftarkan proyek baru sekarang
               </button>
@@ -100,35 +100,35 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
                   sound.playClick();
                   onSelect(p);
                 }}
-                className="pt-2.5 first:pt-0 group flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 cursor-pointer transition"
+                className="pt-2.5 first:pt-0 group flex items-center justify-between p-3 rounded-xl hover:bg-black/[0.03] border border-transparent hover:border-black/10 cursor-pointer transition"
               >
                 <div className="flex items-center space-x-3 truncate">
-                  <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-black/[0.05] text-black/70 flex items-center justify-center font-mono font-bold text-xs shrink-0">
                     #{idx + 1}
                   </div>
 
                   <div className="truncate">
                     <div className="flex items-center space-x-1.5">
-                      <span className="font-semibold text-sm text-[#071E49] group-hover:text-blue-700">
+                      <span className="font-semibold text-sm text-black group-hover:underline underline-offset-2">
                         {p.name}
                       </span>
                       {p.verified && (
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C] shrink-0" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-black/40 shrink-0" />
                       )}
-                      <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-medium">
+                      <span className="text-[10px] bg-black/[0.05] text-black/65 px-2 py-0.5 rounded-full font-medium">
                         {p.category}
                       </span>
                     </div>
-                    <div className="text-xs text-slate-500 font-mono">
-                      {p.handle} • Rekor: <strong className="text-slate-700 font-semibold">{p.bestScore} ompreng</strong>
+                    <div className="text-xs text-black/55 font-mono">
+                      {p.handle} • Rekor: <strong className="text-black/75 font-semibold">{p.bestScore} ompreng</strong>
                     </div>
                   </div>
                 </div>
 
                 <button
-                  className="bg-slate-100 group-hover:bg-[#071E49] group-hover:text-white text-[#071E49] text-xs font-medium px-3 py-1.5 rounded-lg border border-slate-200 group-hover:border-[#071E49] shadow-xs flex items-center space-x-1 shrink-0 ml-2 transition"
+                  className="bg-black/[0.04] group-hover:bg-black group-hover:text-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border border-black/10 flex items-center space-x-1 shrink-0 ml-2 transition"
                 >
-                  <Play className="w-3 h-3 text-[#D1B06C] fill-current" />
+                  <Play className="w-3 h-3 fill-current text-white" />
                   <span>Pilih</span>
                 </button>
               </div>

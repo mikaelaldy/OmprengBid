@@ -207,7 +207,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col text-[#071E49]">
+    <div className="min-h-screen bg-white flex flex-col text-black">
       {/* 1. Official Header */}
       <Header
         onOpenSubmit={() => {
@@ -236,22 +236,22 @@ export default function App() {
             }}
           />
         ) : (
-          <div className="bg-gradient-to-br from-[#071E49] via-[#0B2556] to-[#071E49] border border-slate-700/70 rounded-2xl p-6 sm:p-8 text-white text-center shadow-xs">
-            <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#162C5A] to-[#0A1D40] text-[#D1B06C] flex items-center justify-center border border-[#D1B06C]/40 mb-3 shadow-xs">
-              <Trophy className="w-6 h-6 text-[#D1B06C]" />
+          <div className="bg-white border border-black/10 rounded-lg p-6 sm:p-8 text-center">
+            <div className="w-12 h-12 mx-auto rounded-lg bg-black/[0.05] text-black flex items-center justify-center mb-3">
+              <Trophy className="w-6 h-6 text-black/60" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              Papan Billboard Juara #1 Masih Kosong!
+            <h2 className="text-xl sm:text-2xl font-bold text-black tracking-tight">
+              Papan Billboard Juara #1 Masih Kosong
             </h2>
-            <p className="text-slate-300 text-xs sm:text-sm mt-1.5 max-w-xl mx-auto">
-              Daftarkan proyek atau startup-mu sekarang, mainkan tantangan menara baki Ompreng, dan rebut tahta #1 pertama di OmprengBid!
+            <p className="text-black/60 text-xs sm:text-sm mt-1.5 max-w-xl mx-auto">
+              Daftarkan proyekmu, mainkan tantangan menara ompreng, dan rebut posisi #1 pertama di OmprengBid.
             </p>
             <button
               onClick={() => setIsSubmitModalOpen(true)}
-              className="mt-4 bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-xs transition active:scale-95 inline-flex items-center space-x-2"
+              className="mt-4 bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-lg transition active:scale-95 inline-flex items-center space-x-2"
             >
               <Sparkles className="w-4 h-4" />
-              <span>Daftarkan Proyek Pertama Sekarang</span>
+              <span>Daftarkan Proyek Pertama</span>
             </button>
           </div>
         )}
@@ -266,17 +266,17 @@ export default function App() {
       </main>
 
       {/* Institutional Footer */}
-      <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-500">
+      <footer className="bg-white border-t border-black/10 mt-12 py-8 text-xs text-black/55">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-5">
           <div className="flex flex-col sm:flex-row items-center gap-3">
             <div className="flex items-center space-x-2.5">
-              <div className="w-6 h-6 rounded-md bg-[#071E49] text-[#D1B06C] flex items-center justify-center font-bold text-[10px] font-mono">
+              <div className="w-6 h-6 rounded-md bg-black text-white flex items-center justify-center font-bold text-[10px] font-mono">
                 OB
               </div>
-              <span className="font-semibold text-[#071E49]">OmprengBid</span>
+              <span className="font-semibold text-black">OmprengBid</span>
               <span>•</span>
-              <span className="text-slate-600">
-                Made by <strong className="text-[#071E49] font-semibold">mikaships</strong>
+              <span className="text-black/65">
+                Made by <strong className="text-black font-semibold">mikaships</strong>
               </span>
             </div>
 
@@ -285,19 +285,19 @@ export default function App() {
                 href="https://www.threads.com/@mikaships"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-[#071E49] rounded-lg transition font-medium border border-slate-200"
+                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-black/[0.02] hover:bg-black/[0.04] text-black/75 hover:text-black rounded-lg transition font-medium border border-black/10"
               >
                 <span>Follow on Threads</span>
-                <ExternalLink className="w-3 h-3 text-slate-400" />
+                <ExternalLink className="w-3 h-3 text-black/45" />
               </a>
               <a
                 href="https://x.com/mikaships_dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-[#071E49] rounded-lg transition font-medium border border-slate-200"
+                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-black/[0.02] hover:bg-black/[0.04] text-black/75 hover:text-black rounded-lg transition font-medium border border-black/10"
               >
                 <span>Twitter / X (@mikaships_dev)</span>
-                <ExternalLink className="w-3 h-3 text-slate-400" />
+                <ExternalLink className="w-3 h-3 text-black/45" />
               </a>
             </div>
           </div>
@@ -305,21 +305,21 @@ export default function App() {
           <div className="flex items-center space-x-4 text-xs">
             <button
               onClick={() => setIsTutorialOpen(true)}
-              className="text-slate-500 hover:text-[#071E49] transition"
+              className="text-black/55 hover:text-black transition"
             >
               Tutorial & Bantuan
             </button>
             <span>•</span>
             <button
               onClick={() => setIsRegulationsOpen(true)}
-              className="text-slate-500 hover:text-[#071E49] transition"
+              className="text-black/55 hover:text-black transition"
             >
               Regulasi Kompetisi
             </button>
             <span>•</span>
             <button
               onClick={() => setIsSubmitModalOpen(true)}
-              className="text-slate-500 hover:text-[#071E49] transition"
+              className="text-black/55 hover:text-black transition"
             >
               Daftar Proyek Baru
             </button>

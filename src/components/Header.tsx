@@ -27,12 +27,12 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header className="bg-[#071E49] border-b border-slate-700/60 sticky top-0 z-30 shadow-xs">
+    <header className="bg-white border-b border-black/10 sticky top-0 z-30">
       {/* Main navigation header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-3.5 flex items-center justify-between">
         {/* Brand identity & Crest */}
         <div className="flex items-center space-x-3">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-slate-800 to-[#071E49] p-1 border border-slate-600/80 shadow-md shrink-0 flex items-center justify-center">
+          <div className="w-11 h-11 rounded-lg bg-white p-1 border border-black/15 shrink-0 flex items-center justify-center">
             {/* SVG MBG 5-Compartment Tray Logo */}
             <svg viewBox="0 0 100 75" className="w-full h-full drop-shadow-sm">
               <defs>
@@ -68,11 +68,11 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-white text-xl sm:text-2xl font-bold tracking-tight">
-                Ompreng<span className="text-[#D1B06C]">Bid</span>
+              <h1 className="text-black text-xl sm:text-2xl font-bold tracking-tight">
+                Ompreng<span className="text-black/60">Bid</span>
               </h1>
             </div>
-            <p className="text-slate-400 text-xs font-normal">
+            <p className="text-black/45 text-xs font-normal">
               Etalase Proyek Indie Hacker & Builder Nusantara
             </p>
           </div>
@@ -81,22 +81,22 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Live Visitor & Action Controls */}
         <div className="flex items-center space-x-2 sm:space-x-3">
           {/* Real-time Visitor Stats Indicator */}
-          <div className="flex items-center space-x-2 bg-slate-900/90 border border-slate-700/80 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs">
+          <div className="flex items-center space-x-2 bg-black/[0.04] border border-black/10 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs">
             <div className="flex items-center space-x-1.5" title="Pengunjung Online Saat Ini">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="font-mono font-bold text-emerald-400">{liveVisitors}</span>
-              <span className="text-slate-400 hidden xs:inline text-[11px]">live</span>
+              <span className="font-mono font-bold text-emerald-600">{liveVisitors}</span>
+              <span className="text-black/45 hidden xs:inline text-[11px]">live</span>
             </div>
 
-            <span className="text-slate-600">|</span>
+            <span className="text-black/20">|</span>
 
-            <div className="flex items-center space-x-1 text-slate-300" title="Total Kunjungan">
-              <Eye className="w-3 h-3 text-slate-400" />
-              <span className="font-mono font-medium text-slate-200">{totalVisitors.toLocaleString()}</span>
-              <span className="text-slate-400 hidden md:inline text-[11px]">views</span>
+            <div className="flex items-center space-x-1 text-black/70" title="Total Kunjungan">
+              <Eye className="w-3 h-3 text-black/45" />
+              <span className="font-mono font-medium text-black/25">{totalVisitors.toLocaleString()}</span>
+              <span className="text-black/45 hidden md:inline text-[11px]">views</span>
             </div>
           </div>
 
@@ -105,10 +105,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-tutorial-header"
               onClick={onOpenTutorial}
-              className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+              className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/70 hover:text-black bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-lg transition"
               title="Cara Bermain & Tutorial"
             >
-              <HelpCircle className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <HelpCircle className="w-3.5 h-3.5 text-black/50" />
               <span>Tutorial</span>
             </button>
           )}
@@ -117,10 +117,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-regulations"
             onClick={onOpenRegulations}
-            className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+            className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/70 hover:text-black bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-lg transition"
             title="Cara Main & Aturan"
           >
-            <Info className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <Info className="w-3.5 h-3.5 text-black/50" />
             <span>Cara Main</span>
           </button>
 
@@ -128,13 +128,13 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-sound-toggle"
             onClick={handleToggleMute}
-            className="p-2 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+            className="p-2 text-black/70 hover:text-black bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-lg transition"
             title={isMuted ? 'Nyalakan Audio' : 'Matikan Audio'}
           >
             {isMuted ? (
-              <VolumeX className="w-4 h-4 text-rose-400" />
+              <VolumeX className="w-4 h-4 text-rose-600" />
             ) : (
-              <Volume2 className="w-4 h-4 text-[#D1B06C]" />
+              <Volume2 className="w-4 h-4 text-black/50" />
             )}
           </button>
 
@@ -142,10 +142,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-submit-project-header"
             onClick={onOpenSubmit}
-            className="hidden md:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition shrink-0"
+            className="hidden md:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/70 hover:text-black bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-lg transition shrink-0"
             title="Daftarkan Proyek / Startup"
           >
-            <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <Plus className="w-3.5 h-3.5 text-black/50" />
             <span>Daftar Proyek</span>
           </button>
 
@@ -156,7 +156,7 @@ export const Header: React.FC<HeaderProps> = ({
               sound.playClick();
               if (onStartGame) onStartGame();
             }}
-            className="bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm shadow-xs flex items-center space-x-1.5 transition active:scale-95 shrink-0"
+            className="bg-black hover:bg-neutral-800 text-white font-bold px-3.5 sm:px-4 py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1.5 transition active:scale-95 shrink-0"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Main Sekarang</span>
