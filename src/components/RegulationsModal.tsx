@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, ShieldCheck, Sparkles, Trophy, Zap, Layers, Flame, CheckCircle2 } from 'lucide-react';
+import { X, ShieldCheck, Sparkles, Trophy, Zap, Layers, Flame, CheckCircle2, ExternalLink } from 'lucide-react';
 
 interface RegulationsModalProps {
   isOpen: boolean;
@@ -111,6 +111,39 @@ export const RegulationsModal: React.FC<RegulationsModalProps> = ({
               <li>Konfigurasi: 5 Sekat Kompartemen Presisi</li>
               <li>Ketebalan Standar: 4.5 cm per baki (1.80m = 40 baki tumpukan)</li>
             </ul>
+          </div>
+
+          {/* Section 4: Creator / Developer Credit */}
+          <div className="bg-gradient-to-r from-slate-50 to-amber-50/40 border border-slate-200 p-4 rounded-xl space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-xs text-[#071E49]">
+                Created & Developed by mikaships
+              </span>
+              <span className="text-[11px] text-[#D1B06C] font-medium font-mono">@mikaships</span>
+            </div>
+            <p className="text-xs text-slate-600">
+              Dibangun untuk meramaikan ekosistem indie tech & startup Indonesia. Yuk terhubung dan saling follow:
+            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <a
+                href="https://www.threads.com/@mikaships"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-800 rounded-lg text-xs font-medium border border-slate-200 shadow-2xs transition"
+              >
+                <span>Threads (@mikaships)</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+              <a
+                href="https://x.com/mikaships_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-800 rounded-lg text-xs font-medium border border-slate-200 shadow-2xs transition"
+              >
+                <span>Twitter / X (@mikaships_dev)</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+            </div>
           </div>
 
         </div>

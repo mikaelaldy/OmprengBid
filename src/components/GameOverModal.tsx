@@ -42,7 +42,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   const precisionPercent = traysStacked > 0 ? Math.round((perfectDrops / traysStacked) * 100) : 0;
 
   // Pre-formatted text for X (Twitter)
-  const twitterMessage = `🍱 Saya berhasil menumpuk ${traysStacked} baki Ompreng (${heightMeters}m, Max Combo x${maxCombo}) dengan skor ${score.toLocaleString()} pts untuk mem-boost proyek ${project.handle} di OmprengBid! 🇮🇩✨\n\nCoba kalahkan rekor saya di:\n${appUrl}\n#OmprengBid #IndieHackerID #BuildInPublic`;
+  const twitterMessage = `🍱 Saya berhasil menumpuk ${traysStacked} baki Ompreng (${heightMeters}m, Max Combo x${maxCombo}) dengan skor ${score.toLocaleString()} pts untuk mem-boost proyek ${project.handle} di OmprengBid by @mikaships_dev! 🇮🇩✨\n\nCoba kalahkan rekor saya di:\n${appUrl}\n#OmprengBid #IndieHackerID #BuildInPublic`;
 
   // Pre-formatted Markdown for Discord
   const discordMessage = `🍱 **OmprengBid — Menara Baki Run**\n🏆 **Skor:** \`${score.toLocaleString()} pts\` | 🍱 **Tumpukan:** \`${traysStacked} Ompreng (${heightMeters}m)\`\n🔥 **Max Combo:** \`x${maxCombo}\` | ✨ **Presisi:** \`${perfectDrops} perfect (${precisionPercent}%)\`\n🚀 **Mendukung:** \`${project.name} (${project.handle})\`\n👉 Mainkan sekarang: <${appUrl}>`;

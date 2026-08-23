@@ -258,13 +258,38 @@ export default function App() {
 
       {/* Institutional Footer */}
       <footer className="bg-white border-t border-slate-200 mt-12 py-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-6 h-6 rounded-md bg-[#071E49] text-[#D1B06C] flex items-center justify-center font-bold text-[10px] font-mono">
-              OB
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-5">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-6 h-6 rounded-md bg-[#071E49] text-[#D1B06C] flex items-center justify-center font-bold text-[10px] font-mono">
+                OB
+              </div>
+              <span className="font-semibold text-[#071E49]">OmprengBid</span>
+              <span>•</span>
+              <span className="text-slate-600">
+                Made by <strong className="text-[#071E49] font-semibold">mikaships</strong>
+              </span>
             </div>
-            <div>
-              <span className="font-semibold text-[#071E49]">OmprengBid</span> • Komunitas Indie Hacker & Tech Builder Indonesia © 2026
+
+            <div className="flex items-center space-x-2">
+              <a
+                href="https://www.threads.com/@mikaships"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-[#071E49] rounded-lg transition font-medium border border-slate-200"
+              >
+                <span>Follow on Threads</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
+              <a
+                href="https://x.com/mikaships_dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 px-2.5 py-1 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-[#071E49] rounded-lg transition font-medium border border-slate-200"
+              >
+                <span>Twitter / X (@mikaships_dev)</span>
+                <ExternalLink className="w-3 h-3 text-slate-400" />
+              </a>
             </div>
           </div>
 
@@ -289,10 +314,6 @@ export default function App() {
             >
               Daftar Proyek Baru
             </button>
-            <span>•</span>
-            <span className="text-slate-700 font-mono">
-              v2.5D Engine
-            </span>
           </div>
         </div>
       </footer>
