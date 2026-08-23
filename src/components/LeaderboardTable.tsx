@@ -3,6 +3,7 @@ import { Trophy, Medal, ExternalLink, Play, Search, Filter, ShieldCheck, Flame, 
 import { Project, ProjectCategory } from '../types';
 import { incrementClickCount } from '../utils/storage';
 import { sound } from '../utils/audio';
+import { trackProjectLinkClick } from '../lib/analytics';
 
 interface LeaderboardTableProps {
   projects: Project[];
@@ -48,9 +49,10 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
     return matchesCategory && matchesSearch;
   });
 
-  const handleExternalClick = (projectId: string) => {
+  const handleExternalClick = (project: Project) => {
     sound.playClick();
-    incrementClickCount(projectId);
+    incrementClickCount(project.id);
+    trackProjectLinkClick(project.name, project.url);
   };
 
   return (
@@ -218,7 +220,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                               href={p.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              onClick={() => handleExternalClick(p.id)}
+                              onClick={() => handleExternalClick(p)}
                               className="font-semibold text-sm sm:text-base text-[#071E49] hover:text-blue-700 flex items-center space-x-1"
                             >
                               <span>{p.name}</span>

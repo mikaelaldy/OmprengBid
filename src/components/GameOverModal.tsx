@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Trophy, RotateCcw, Award, Sparkles, Share2, ExternalLink, ArrowRight, ShieldCheck, Flame, Check, Copy } from 'lucide-react';
 import { Project } from '../types';
 import { sound } from '../utils/audio';
+import { trackShare } from '../lib/analytics';
 
 interface GameOverModalProps {
   isOpen: boolean;
@@ -38,7 +39,9 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
 
   if (!isOpen) return null;
 
-  const appUrl = window.location.href;
+  const appUrl = window.location.origin.includes('ai.studio') || window.location.origin.includes('localhost') 
+    ? 'https://omprengbid.ai.studio' 
+    : window.location.origin;
   const precisionPercent = traysStacked > 0 ? Math.round((perfectDrops / traysStacked) * 100) : 0;
 
   // Pre-formatted text for X (Twitter)
@@ -49,12 +52,14 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
 
   const handleShareTwitter = () => {
     sound.playClick();
+    trackShare('twitter', project.name);
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`;
     window.open(twitterUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyDiscord = async () => {
     sound.playClick();
+    trackShare('discord', project.name);
     try {
       await navigator.clipboard.writeText(discordMessage);
       setCopiedType('discord');
@@ -66,6 +71,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
 
   const handleShareGeneral = async () => {
     sound.playClick();
+    trackShare('copy', project.name);
     if (navigator.share) {
       try {
         await navigator.share({

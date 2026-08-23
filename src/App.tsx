@@ -22,8 +22,10 @@ import {
   getStoredPlayerHandle,
 } from './utils/storage';
 import { Trophy, ShieldCheck, Sparkles, Layers, Award, Play, Flame, ExternalLink, HelpCircle, Cloud } from 'lucide-react';
+import { trackGameStart, trackGameOver } from './lib/analytics';
 
 export default function App() {
+
   const [projects, setProjects] = useState<Project[]>(() => loadCachedProjects());
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [isConnectedToCloud, setIsConnectedToCloud] = useState<boolean>(false);
@@ -73,6 +75,7 @@ export default function App() {
 
   // Launch Game for a specific project
   const handleStartGame = (project: Project) => {
+    trackGameStart(project.name, project.id);
     setActiveProject(project);
     setIsGaming(true);
     setIsGameOverOpen(false);
@@ -103,6 +106,15 @@ export default function App() {
         playerHandle,
         projects
       );
+
+      trackGameOver({
+        projectName: updatedProject.name,
+        score: scoreVal,
+        traysStacked: stats.traysStacked,
+        maxCombo: stats.maxCombo,
+        perfectDrops: stats.perfectDrops,
+        isNewRank1,
+      });
 
       setActiveProject(updatedProject);
       setLastGameResult({

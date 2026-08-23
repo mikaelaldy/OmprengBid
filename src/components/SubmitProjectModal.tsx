@@ -3,6 +3,7 @@ import { X, Plus, Sparkles, ShieldCheck, Globe, AtSign, Tag, CheckCircle2 } from
 import { Project, ProjectCategory } from '../types';
 import { registerNewProject, setStoredPlayerHandle } from '../utils/storage';
 import { sound } from '../utils/audio';
+import { trackProjectRegistered } from '../lib/analytics';
 
 interface SubmitProjectModalProps {
   isOpen: boolean;
@@ -62,6 +63,8 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
         tagline: tagline.trim() || 'Inovasi ekosistem digital builder nusantara',
         category,
       });
+
+      trackProjectRegistered(newProj.name, newProj.category, newProj.handle);
 
       setStoredPlayerHandle(handle.trim());
       onSuccess(newProj);
