@@ -49,26 +49,26 @@ export const GameStageModal: React.FC<GameStageModalProps> = ({
       />
 
       {/* Top Game Stage Nav */}
-      <div className="bg-[#071E49] text-white px-3 sm:px-6 h-13 sm:h-14 flex items-center justify-between border-b border-slate-700 shadow-xs z-30 shrink-0 gap-2">
+      <div className="bg-white text-black px-3 sm:px-6 h-13 sm:h-14 flex items-center justify-between border-b border-black/10 z-30 shrink-0 gap-2">
         
         {/* Left: Project Representation */}
         <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 truncate">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#162C5A] to-[#0A1D40] text-[#D1B06C] flex items-center justify-center font-mono font-bold text-xs border border-[#D1B06C]/40 shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/5 text-black flex items-center justify-center font-mono font-bold text-xs border border-black/10 shrink-0">
             OB
           </div>
           <div className="min-w-0 truncate">
             <div className="flex items-center space-x-1 sm:space-x-1.5 truncate">
-              <span className="text-[10px] sm:text-[11px] text-slate-400 shrink-0">
+              <span className="text-[10px] sm:text-[11px] text-black/50 shrink-0">
                 {project ? 'Dukung:' : 'Arcade:'}
               </span>
               <span className="font-semibold text-xs sm:text-sm text-white truncate max-w-[120px] xs:max-w-[180px] sm:max-w-[260px]">
                 {project ? project.name : 'Sesi Bebas'}
               </span>
               {project?.verified && (
-                <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C] shrink-0" />
+                <ShieldCheck className="w-3.5 h-3.5 text-black shrink-0" />
               )}
             </div>
-            <div className="text-[9px] sm:text-[10px] text-slate-400 font-mono truncate">
+            <div className="text-[9px] sm:text-[10px] text-black/50 font-mono truncate">
               {project 
                 ? `${project.handle} • Rekor: ${project.bestScore.toLocaleString()} pts`
                 : 'Target #1: ' + (rank1Project ? `${rank1Project.bestScore.toLocaleString()} pts (${rank1Project.name})` : '4,800 pts')}
@@ -84,30 +84,30 @@ export const GameStageModal: React.FC<GameStageModalProps> = ({
               sound.playClick();
               setShowTutorial(true);
             }}
-            className="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 min-h-[36px] sm:min-h-[40px] text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-lg transition"
+            className="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 min-h-[36px] sm:min-h-[40px] text-xs font-medium text-black/80 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
             title="Buka Tutorial & Cara Main"
           >
-            <HelpCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D1B06C]" />
+            <HelpCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
             <span className="hidden sm:inline">Tutorial</span>
           </button>
 
           {/* Sound Toggle */}
           <button
             onClick={handleToggleMute}
-            className="p-2 min-w-[36px] min-h-[36px] sm:min-w-[40px] sm:min-h-[40px] flex items-center justify-center text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-lg transition"
+            className="p-2 min-w-[36px] min-h-[36px] sm:min-w-[40px] sm:min-h-[40px] flex items-center justify-center text-black/65 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
             title={isMuted ? 'Nyalakan Audio' : 'Matikan Audio'}
           >
             {isMuted ? (
               <VolumeX className="w-4 h-4 text-rose-400" />
             ) : (
-              <Volume2 className="w-4 h-4 text-[#D1B06C]" />
+              <Volume2 className="w-4 h-4 text-black" />
             )}
           </button>
 
           {/* Close / Exit Button */}
           <button
             onClick={onClose}
-            className="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 min-h-[36px] sm:min-h-[40px] text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-lg transition active:scale-95"
+            className="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 min-h-[36px] sm:min-h-[40px] text-xs font-medium text-black/80 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition active:scale-95"
           >
             <X className="w-4 h-4" />
             <span className="hidden sm:inline">Keluar</span>

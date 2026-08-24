@@ -719,10 +719,10 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
     >
       {/* Giant Minimalist Background Stack Counter */}
       <div className="absolute top-10 sm:top-12 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-10 select-none">
-        <span className="text-slate-300/40 text-6xl sm:text-8xl md:text-9xl font-bold tabular-nums tracking-tight leading-none font-mono">
+        <span className="text-black/65/40 text-6xl sm:text-8xl md:text-9xl font-bold tabular-nums tracking-tight leading-none font-mono">
           {String(traysStacked).padStart(2, '0')}
         </span>
-        <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 bg-white/80 border border-slate-200 px-2.5 sm:px-3 py-0.5 rounded-full shadow-xs -mt-1">
+        <p className="text-[10px] sm:text-[11px] font-medium text-black/50 bg-white/80 border border-black/10 px-2.5 sm:px-3 py-0.5 rounded-full shadow-xs -mt-1">
           Tumpukan Ompreng
         </p>
       </div>
@@ -733,7 +733,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
       {/* Top HUD: Current Project & Score Display */}
       <div className="absolute top-3 sm:top-4 inset-x-3 sm:inset-x-4 flex items-start justify-between pointer-events-none z-20 gap-2">
         {/* Left: Minimalist Project Badge */}
-        <div className="bg-[#071E49] text-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl shadow-xs border border-slate-700 flex items-center space-x-2 max-w-[55%] sm:max-w-none">
+        <div className="bg-white text-black px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg border border-black/10 flex items-center space-x-2 max-w-[55%] sm:max-w-none">
           <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#D1B06C] animate-pulse shrink-0" />
           <div className="truncate">
             <div className="text-[9px] sm:text-[10px] text-[#D1B06C] font-medium leading-tight truncate">
@@ -747,22 +747,22 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
 
         {/* Center/Right: Target / Score Indicator */}
         <div className="flex flex-col items-end space-y-1 sm:space-y-1.5 shrink-0">
-          <div className="bg-white/95 backdrop-blur-xs border border-slate-200 shadow-xs px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-right">
-            <div className="text-[9px] sm:text-[10px] text-slate-500 font-medium">
+          <div className="bg-white/95 backdrop-blur-xs border border-black/10 shadow-xs px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-right">
+            <div className="text-[9px] sm:text-[10px] text-black/50 font-medium">
               Skor Poin
             </div>
             <div className="text-lg sm:text-2xl font-bold text-[#071E49] font-mono leading-none flex items-baseline justify-end space-x-1 mt-0.5">
               <span>{score.toLocaleString()}</span>
-              <span className="text-[10px] sm:text-xs text-slate-400 font-sans font-normal">pts</span>
+              <span className="text-[10px] sm:text-xs text-black/50 font-sans font-normal">pts</span>
             </div>
-            <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 mt-0.5">
+            <div className="text-[10px] sm:text-[11px] font-mono text-black/50 mt-0.5">
               {traysStacked} baki ({(traysStacked * 0.045).toFixed(2)}m)
             </div>
           </div>
 
           {/* Overtake #1 indicator */}
           {rank1Project && traysStacked < rank1Project.bestScore && (
-            <div className="bg-slate-800/90 text-slate-200 border border-slate-700 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-medium flex items-center space-x-1 sm:space-x-1.5 shadow-xs">
+            <div className="bg-black/5 text-black/80 border border-black/10 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-medium flex items-center space-x-1 sm:space-x-1.5 shadow-xs">
               <Target className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D1B06C]" />
               <span>
                 <strong className="text-[#D1B06C] font-semibold">{gapToRank1}</strong> ompreng lagi
@@ -781,9 +781,9 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
 
       {/* Bottom Right: Combo Multiplier Card */}
       <div className="absolute bottom-16 sm:bottom-5 right-3 sm:right-5 flex flex-col gap-2 pointer-events-none z-20">
-        <div className="bg-white/95 backdrop-blur-xs p-2.5 sm:p-3.5 rounded-xl shadow-sm border border-slate-200 min-w-[120px] sm:min-w-[150px]">
+        <div className="bg-white/95 backdrop-blur-xs p-2.5 sm:p-3.5 rounded-xl shadow-sm border border-black/10 min-w-[120px] sm:min-w-[150px]">
           <div className="flex items-center justify-between gap-1">
-            <p className="text-[9px] sm:text-[10px] font-medium text-slate-500">
+            <p className="text-[9px] sm:text-[10px] font-medium text-black/50">
               Multiplikator
             </p>
             {comboStreak > 0 && (
@@ -793,15 +793,15 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
             )}
           </div>
           <div className="flex items-baseline gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
-            <span className={`text-xl sm:text-3xl font-bold font-mono leading-none ${comboMultiplier > 1 ? 'text-[#D1B06C]' : 'text-slate-700'}`}>
+            <span className={`text-xl sm:text-3xl font-bold font-mono leading-none ${comboMultiplier > 1 ? 'text-[#D1B06C]' : 'text-black/75'}`}>
               x{comboMultiplier}
             </span>
-            <span className="text-[10px] sm:text-xs text-slate-500 font-medium">
+            <span className="text-[10px] sm:text-xs text-black/50 font-medium">
               {comboStreak >= 5 ? 'Pulih!' : comboStreak > 0 ? 'Presisi' : 'Standar'}
             </span>
           </div>
           {comboStreak > 0 && comboStreak % 5 !== 0 && (
-            <div className="w-full bg-slate-100 h-1 rounded-full mt-1.5 sm:mt-2 overflow-hidden">
+            <div className="w-full bg-black/[0.03] h-1 rounded-full mt-1.5 sm:mt-2 overflow-hidden">
               <div
                 className="bg-[#D1B06C] h-full transition-all duration-300"
                 style={{ width: `${((comboStreak % 5) / 5) * 100}%` }}
@@ -818,7 +818,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
             className={`px-3.5 sm:px-4 py-2 rounded-xl shadow-lg border text-center flex flex-col items-center gap-0.5 ${
               comboAlert.isRestore
                 ? 'bg-emerald-950 text-white border-emerald-500'
-                : 'bg-[#071E49] text-white border-[#D1B06C]'
+                : 'bg-black text-white border-black'
             }`}
           >
             <div className="flex items-center space-x-1.5 text-xs sm:text-sm font-bold text-[#D1B06C]">
@@ -826,7 +826,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
               <span>{comboAlert.title}</span>
             </div>
             {comboAlert.subtitle && (
-              <p className="text-[10px] sm:text-[11px] text-slate-300 font-normal">
+              <p className="text-[10px] sm:text-[11px] text-black/65 font-normal">
                 {comboAlert.subtitle}
               </p>
             )}
@@ -836,7 +836,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
 
       {/* Mobile-Friendly Fullscreen Tap Zone Bar at Bottom */}
       <div className="absolute bottom-3 inset-x-3 sm:hidden pointer-events-none z-20">
-        <div className="bg-[#071E49]/90 backdrop-blur-xs text-white text-center py-2.5 px-4 rounded-xl border border-slate-700/80 shadow-md flex items-center justify-center space-x-2">
+        <div className="bg-white text-black text-center py-2.5 px-4 rounded-lg border border-black/10 flex items-center justify-center space-x-2">
           <Zap className="w-3.5 h-3.5 text-[#D1B06C] animate-pulse" />
           <span className="text-xs font-semibold text-white">
             {hasStarted ? 'Ketuk di Mana Saja untuk Menumpuk' : 'Ketuk Layar untuk Mulai Menumpuk'}
@@ -847,7 +847,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
       {/* Desktop Start / Tap Hint (Before first interaction) */}
       {!hasStarted && (
         <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20 text-center">
-          <div className="bg-[#071E49] text-white px-5 py-2.5 rounded-full shadow-md border border-slate-700 text-xs font-medium flex items-center space-x-2">
+          <div className="bg-black text-white px-5 py-2.5 rounded-full border border-black text-xs font-medium flex items-center space-x-2">
             <Zap className="w-3.5 h-3.5 text-[#D1B06C]" />
             <span>Klik Layar atau Tekan Spasi untuk Menumpuk</span>
           </div>

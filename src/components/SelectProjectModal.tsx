@@ -31,11 +31,11 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#071E49]/70 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col border border-slate-200 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="bg-white rounded-lg max-w-lg w-full max-h-[90dvh] flex flex-col border border-black/10 shadow-2xl overflow-hidden">
         
         {/* Header */}
-        <div className="bg-[#071E49] text-white p-4 sm:p-6 flex items-center justify-between border-b border-slate-700 shrink-0">
+        <div className="bg-white text-black p-4 sm:p-6 flex items-center justify-between border-b border-black/10 shrink-0">
           <div>
             <h3 className="text-base sm:text-lg font-bold">
               Pilih Proyek untuk Di-Boost
@@ -46,22 +46,22 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition"
+            className="text-black/50 hover:text-black p-2 rounded-lg hover:bg-black/5 transition"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search Bar & Action */}
-        <div className="p-3 sm:p-4 border-b border-slate-200 bg-slate-50 flex items-center gap-2.5 shrink-0">
+        <div className="p-3 sm:p-4 border-b border-black/10 bg-black/[0.02] flex items-center gap-2.5 shrink-0">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-black/50" />
             <input
               type="text"
               placeholder="Cari nama atau @handle..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:border-[#071E49]"
+              className="w-full bg-white border border-black/10 rounded-lg pl-9 pr-3 py-2.5 text-base sm:text-sm text-black/85 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:border-[#071E49]"
             />
           </div>
 
@@ -70,7 +70,7 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
               onClose();
               onOpenSubmit();
             }}
-            className="bg-[#071E49] hover:bg-[#0c2a63] text-white text-xs font-medium px-3 sm:px-3.5 py-2.5 rounded-xl flex items-center space-x-1.5 shrink-0 transition min-h-[40px]"
+            className="bg-black hover:bg-black/85 text-white text-xs font-medium px-3 sm:px-3.5 py-2.5 rounded-lg flex items-center space-x-1.5 shrink-0 transition min-h-[40px]"
           >
             <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
             <span className="hidden xs:inline">Proyek Baru</span>
@@ -80,7 +80,7 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
         {/* Project List */}
         <div className="overflow-y-auto p-3 sm:p-4 space-y-1.5 sm:space-y-2 flex-1 divide-y divide-slate-100">
           {filtered.length === 0 ? (
-            <div className="py-8 text-center text-slate-500">
+            <div className="py-8 text-center text-black/50">
               <p className="text-sm font-medium">Proyek tidak ditemukan.</p>
               <button
                 onClick={() => {
@@ -100,10 +100,10 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
                   sound.playClick();
                   onSelect(p);
                 }}
-                className="pt-2.5 first:pt-0 group flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-200 cursor-pointer transition min-h-[48px] active:bg-slate-100"
+                className="pt-2.5 first:pt-0 group flex items-center justify-between p-3 rounded-lg hover:bg-black/[0.02] border border-transparent hover:border-black/10 cursor-pointer transition min-h-[48px] active:bg-black/[0.03]"
               >
                 <div className="flex items-center space-x-2.5 sm:space-x-3 truncate">
-                  <div className="w-7 h-7 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                  <div className="w-7 h-7 rounded-lg bg-black/[0.03] text-black/75 flex items-center justify-center font-mono font-bold text-xs shrink-0">
                     #{idx + 1}
                   </div>
 
@@ -115,18 +115,18 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
                       {p.verified && (
                         <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C] shrink-0" />
                       )}
-                      <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 sm:px-2 py-0.5 rounded-full font-medium shrink-0">
+                      <span className="text-[10px] bg-black/[0.03] text-black/65 px-1.5 sm:px-2 py-0.5 rounded-full font-medium shrink-0">
                         {p.category}
                       </span>
                     </div>
-                    <div className="text-[11px] sm:text-xs text-slate-500 font-mono truncate">
-                      {p.handle} • Rekor: <strong className="text-slate-700 font-semibold">{p.bestScore.toLocaleString()} pts</strong>
+                    <div className="text-[11px] sm:text-xs text-black/50 font-mono truncate">
+                      {p.handle} • Rekor: <strong className="text-black/75 font-semibold">{p.bestScore.toLocaleString()} pts</strong>
                     </div>
                   </div>
                 </div>
 
                 <button
-                  className="bg-slate-100 group-hover:bg-[#071E49] group-hover:text-white text-[#071E49] text-xs font-medium px-3 py-1.5 sm:py-2 rounded-lg border border-slate-200 group-hover:border-[#071E49] shadow-xs flex items-center space-x-1 shrink-0 ml-2 transition min-h-[36px]"
+                  className="bg-black/5 group-hover:bg-black group-hover:text-black text-black text-xs font-medium px-3 py-1.5 sm:py-2 rounded-lg border border-black/10 group-hover:border-black shadow-xs flex items-center space-x-1 shrink-0 ml-2 transition min-h-[36px]"
                 >
                   <Play className="w-3 h-3 text-[#D1B06C] fill-current" />
                   <span>Pilih</span>

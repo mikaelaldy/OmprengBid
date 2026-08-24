@@ -72,12 +72,12 @@ export const Header: React.FC<HeaderProps> = ({
   const isAdmin = isUserAdmin(authUser);
 
   return (
-    <header className="bg-[#071E49] border-b border-slate-700/60 sticky top-0 z-30 shadow-xs">
+    <header className="bg-white border-b border-black/10 sticky top-0 z-30">
       {/* Main navigation header */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between">
         {/* Brand identity & Crest */}
         <div className="flex items-center space-x-2.5 sm:space-x-3">
-          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-slate-800 to-[#071E49] p-1 border border-slate-600/80 shadow-md shrink-0 flex items-center justify-center">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-black/5 p-1 border border-black/10 shrink-0 flex items-center justify-center">
             {/* SVG MBG 5-Compartment Tray Logo */}
             <svg viewBox="0 0 100 75" className="w-full h-full drop-shadow-sm">
               <defs>
@@ -113,11 +113,11 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div>
             <div className="flex items-center space-x-1.5">
-              <h1 className="text-white text-lg sm:text-2xl font-bold tracking-tight">
-                Ompreng<span className="text-[#D1B06C]">Bid</span>
+              <h1 className="text-black text-lg sm:text-2xl font-bold tracking-tight">
+                Ompreng<span className="text-black">Bid</span>
               </h1>
             </div>
-            <p className="text-slate-400 text-[10px] sm:text-xs font-normal truncate max-w-[130px] sm:max-w-none">
+            <p className="text-black/50 text-[10px] sm:text-xs font-normal truncate max-w-[130px] sm:max-w-none">
               Etalase Proyek Indie Hacker
             </p>
           </div>
@@ -126,21 +126,21 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Live Visitor & Action Controls */}
         <div className="flex items-center space-x-1.5 sm:space-x-2.5">
           {/* Real-time Visitor Stats Indicator */}
-          <div className="flex items-center space-x-1.5 sm:space-x-2 bg-slate-900/90 border border-slate-700/80 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs">
+          <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/90 border border-black/10/80 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs">
             <div className="flex items-center space-x-1" title="Pengunjung Online Saat Ini">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span className="font-mono font-bold text-emerald-400 text-xs">{liveVisitors}</span>
-              <span className="text-slate-400 hidden xs:inline text-[10px]">live</span>
+              <span className="text-black/50 hidden xs:inline text-[10px]">live</span>
             </div>
 
-            <span className="text-slate-600 hidden xs:inline">|</span>
+            <span className="text-black/65 hidden xs:inline">|</span>
 
-            <div className="hidden xs:flex items-center space-x-1 text-slate-300" title="Total Kunjungan">
-              <Eye className="w-3 h-3 text-slate-400" />
-              <span className="font-mono font-medium text-slate-200 text-xs">{totalVisitors.toLocaleString()}</span>
+            <div className="hidden xs:flex items-center space-x-1 text-black/65" title="Total Kunjungan">
+              <Eye className="w-3 h-3 text-black/50" />
+              <span className="font-mono font-medium text-black/80 text-xs">{totalVisitors.toLocaleString()}</span>
             </div>
           </div>
 
@@ -149,10 +149,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-tutorial-header"
               onClick={onOpenTutorial}
-              className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+              className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/80 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
               title="Cara Bermain & Tutorial"
             >
-              <HelpCircle className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <HelpCircle className="w-3.5 h-3.5 text-black" />
               <span>Tutorial</span>
             </button>
           )}
@@ -161,10 +161,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-regulations"
             onClick={onOpenRegulations}
-            className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+            className="hidden sm:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/80 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
             title="Cara Main & Aturan"
           >
-            <Info className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <Info className="w-3.5 h-3.5 text-black" />
             <span>Aturan</span>
           </button>
 
@@ -172,13 +172,13 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-sound-toggle"
             onClick={handleToggleMute}
-            className="p-1.5 sm:p-2 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+            className="p-1.5 sm:p-2 text-black/65 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
             title={isMuted ? 'Nyalakan Audio' : 'Matikan Audio'}
           >
             {isMuted ? (
               <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-400" />
             ) : (
-              <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#D1B06C]" />
+              <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
             )}
           </button>
 
@@ -190,15 +190,15 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                 className="flex items-center space-x-1.5 p-1 sm:px-2.5 sm:py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 hover:border-amber-500/60 transition text-xs"
               >
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#D1B06C] text-[#071E49] font-bold text-xs flex items-center justify-center">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-black text-white font-bold text-xs flex items-center justify-center">
                   <Shield className="w-3 h-3 text-[#071E49]" />
                 </div>
 
                 <div className="hidden md:flex flex-col text-left">
-                  <span className="text-[#D1B06C] font-bold text-xs leading-none">
+                  <span className="text-black font-bold text-xs leading-none">
                     Admin Panel
                   </span>
-                  <span className="text-[10px] text-slate-400 font-mono mt-0.5">
+                  <span className="text-[10px] text-black/50 font-mono mt-0.5">
                     /admin
                   </span>
                 </div>
@@ -206,12 +206,12 @@ export const Header: React.FC<HeaderProps> = ({
 
               {/* User Dropdown Menu */}
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-slate-900 rounded-xl shadow-xl border border-slate-700 py-2 z-50 text-slate-200 animate-in fade-in zoom-in-95 duration-100">
-                  <div className="px-3.5 py-2 border-b border-slate-800">
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-black/10 py-2 z-50 text-black/80 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="px-3.5 py-2 border-b border-black/10">
                     <p className="font-bold text-xs text-white truncate">
                       Master Moderator
                     </p>
-                    <p className="text-[11px] text-slate-400 truncate">
+                    <p className="text-[11px] text-black/50 truncate">
                       {authUser.email}
                     </p>
                   </div>
@@ -222,7 +222,7 @@ export const Header: React.FC<HeaderProps> = ({
                         setUserDropdownOpen(false);
                         onOpenAdmin();
                       }}
-                      className="w-full px-3.5 py-2 text-left text-xs text-[#D1B06C] hover:bg-slate-800 flex items-center space-x-2 transition"
+                      className="w-full px-3.5 py-2 text-left text-xs text-black hover:bg-black/5 flex items-center space-x-2 transition"
                     >
                       <Shield className="w-3.5 h-3.5" />
                       <span>Buka Panel Moderasi (/admin)</span>
@@ -231,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
 
                   <button
                     onClick={handleLogout}
-                    className="w-full px-3.5 py-2 text-left text-xs text-rose-400 hover:bg-slate-800 flex items-center space-x-2 transition"
+                    className="w-full px-3.5 py-2 text-left text-xs text-rose-400 hover:bg-black/5 flex items-center space-x-2 transition"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     <span>Keluar (Sign Out)</span>
@@ -245,10 +245,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-submit-project-header"
             onClick={onOpenSubmit}
-            className="hidden md:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition shrink-0"
+            className="hidden md:flex items-center space-x-1.5 px-3 py-2 text-xs font-medium text-black/80 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition shrink-0"
             title="Daftarkan Proyek / Startup"
           >
-            <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <Plus className="w-3.5 h-3.5 text-black" />
             <span>Daftar Proyek</span>
           </button>
 
@@ -259,7 +259,7 @@ export const Header: React.FC<HeaderProps> = ({
               sound.playClick();
               if (onStartGame) onStartGame();
             }}
-            className="bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm shadow-xs flex items-center space-x-1 sm:space-x-1.5 transition active:scale-95 shrink-0"
+            className="bg-black hover:bg-black/85 text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-1.5 transition active:scale-95 shrink-0"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Main</span>
@@ -269,13 +269,13 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-mobile-menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="sm:hidden p-1.5 text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 rounded-lg transition"
+            className="sm:hidden p-1.5 text-black/65 hover:text-black bg-black/5 hover:bg-black/10 border border-black/10 rounded-lg transition"
             aria-label="Menu Navigasi"
           >
             {mobileMenuOpen ? (
-              <X className="w-4 h-4 text-slate-200" />
+              <X className="w-4 h-4 text-black/80" />
             ) : (
-              <Menu className="w-4 h-4 text-slate-200" />
+              <Menu className="w-4 h-4 text-black/80" />
             )}
           </button>
         </div>
@@ -283,16 +283,16 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer / Slide-Down Menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#0A1D40] border-t border-slate-700/80 px-4 py-3 space-y-2 animate-in slide-in-from-top-2 duration-150 shadow-lg">
+        <div className="sm:hidden bg-white border-t border-black/10 px-4 py-3 space-y-2 animate-in slide-in-from-top-2 duration-150 shadow-lg">
           <div className="grid grid-cols-2 gap-2 pt-1">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenSubmit();
               }}
-              className="flex items-center justify-center space-x-1.5 p-2.5 bg-slate-800 text-white rounded-xl text-xs font-semibold border border-slate-700 hover:bg-slate-700 active:scale-95 transition"
+              className="flex items-center justify-center space-x-1.5 p-2.5 bg-black/5 text-white rounded-xl text-xs font-semibold border border-black/10 hover:bg-black/10 active:scale-95 transition"
             >
-              <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <Plus className="w-3.5 h-3.5 text-black" />
               <span>Daftar Proyek</span>
             </button>
 
@@ -302,9 +302,9 @@ export const Header: React.FC<HeaderProps> = ({
                   setMobileMenuOpen(false);
                   onOpenTutorial();
                 }}
-                className="flex items-center justify-center space-x-1.5 p-2.5 bg-slate-800 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 hover:bg-slate-700 active:scale-95 transition"
+                className="flex items-center justify-center space-x-1.5 p-2.5 bg-black/5 text-black/80 rounded-xl text-xs font-medium border border-black/10 hover:bg-black/10 active:scale-95 transition"
               >
-                <HelpCircle className="w-3.5 h-3.5 text-[#D1B06C]" />
+                <HelpCircle className="w-3.5 h-3.5 text-black" />
                 <span>Tutorial</span>
               </button>
             )}
@@ -314,9 +314,9 @@ export const Header: React.FC<HeaderProps> = ({
                 setMobileMenuOpen(false);
                 onOpenRegulations();
               }}
-              className="col-span-2 flex items-center justify-center space-x-1.5 p-2.5 bg-slate-800 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 hover:bg-slate-700 active:scale-95 transition"
+              className="col-span-2 flex items-center justify-center space-x-1.5 p-2.5 bg-black/5 text-black/80 rounded-xl text-xs font-medium border border-black/10 hover:bg-black/10 active:scale-95 transition"
             >
-              <Info className="w-3.5 h-3.5 text-[#D1B06C]" />
+              <Info className="w-3.5 h-3.5 text-black" />
               <span>Cara Main & Aturan Leaderboard</span>
             </button>
           </div>

@@ -378,7 +378,7 @@ export default function App() {
             <span>•</span>
             <button
               onClick={() => navigateTo('/admin')}
-              className="text-slate-400 hover:text-[#D1B06C] transition inline-flex items-center space-x-1 font-mono"
+              className="text-black/50 hover:text-[#D1B06C] transition inline-flex items-center space-x-1 font-mono"
             >
               <Shield className="w-3 h-3" />
               <span>Portal Admin</span>

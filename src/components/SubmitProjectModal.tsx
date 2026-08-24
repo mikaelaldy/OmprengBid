@@ -125,13 +125,13 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#071E49]/70 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="bg-white rounded-2xl max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden border border-slate-200 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="bg-white rounded-lg max-w-lg w-full max-h-[90dvh] flex flex-col overflow-hidden border border-black/10 shadow-2xl">
         
         {/* Institutional Modal Header */}
-        <div className="bg-[#071E49] text-white p-4 sm:p-6 flex items-center justify-between border-b border-slate-700 shrink-0">
+        <div className="bg-white text-black p-4 sm:p-6 flex items-center justify-between border-b border-black/10 shrink-0">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#162C5A] to-[#0A1D40] text-[#D1B06C] flex items-center justify-center font-bold text-xs font-mono border border-[#D1B06C]/40 shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-black/5 text-black flex items-center justify-center font-bold text-xs font-mono border border-black/10 shrink-0">
               OB
             </div>
             <div>
@@ -146,7 +146,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
 
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition"
+            className="text-black/50 hover:text-black p-1.5 rounded-lg hover:bg-black/5 transition"
           >
             <X className="w-5 h-5" />
           </button>
@@ -155,13 +155,13 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {initialScore && initialScore > 0 && (
-            <div className="bg-gradient-to-r from-[#071E49] to-[#0D2C66] text-white p-3.5 rounded-xl flex items-center justify-between border border-[#D1B06C]/40 shadow-xs">
+            <div className="bg-black/[0.03] text-black p-3.5 rounded-lg flex items-center justify-between border border-black/10">
               <div className="space-y-0.5">
                 <div className="text-[11px] text-[#D1B06C] font-semibold flex items-center space-x-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#D1B06C]" />
                   <span>Klaim Rekor Sesi Main</span>
                 </div>
-                <div className="text-xs text-slate-200">
+                <div className="text-xs text-black/80">
                   Proyek ini akan langsung terdaftar dengan rekor awal:
                 </div>
               </div>
@@ -169,20 +169,20 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 <span className="text-lg font-bold font-mono text-[#D1B06C]">
                   {initialScore.toLocaleString()}
                 </span>
-                <span className="text-[10px] text-slate-300 ml-1">pts</span>
+                <span className="text-[10px] text-black/65 ml-1">pts</span>
               </div>
             </div>
           )}
 
           {error && (
-            <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium p-3 rounded-xl">
+            <div className="bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium p-3 rounded-lg">
               {error}
             </div>
           )}
 
           {/* Project Name */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1">
+            <label className="block text-xs font-medium text-black/75 mb-1">
               Nama Proyek / Startup *
             </label>
             <div className="relative">
@@ -193,7 +193,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 placeholder="Contoh: NasiBox.ai atau HalalScan"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
+                className="w-full bg-black/[0.02] border border-black/10 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-black/85 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
               />
             </div>
           </div>
@@ -202,8 +202,8 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* Website URL */}
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1 flex items-center space-x-1">
-                <Globe className="w-3.5 h-3.5 text-slate-400" />
+              <label className="block text-xs font-medium text-black/75 mb-1 flex items-center space-x-1">
+                <Globe className="w-3.5 h-3.5 text-black/50" />
                 <span>URL Website / App *</span>
               </label>
               <input
@@ -213,14 +213,14 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 placeholder="https://..."
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
+                className="w-full bg-black/[0.02] border border-black/10 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-black/85 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
               />
             </div>
 
             {/* Builder Handle */}
             <div>
-              <label className="block text-xs font-medium text-slate-700 mb-1 flex items-center space-x-1">
-                <AtSign className="w-3.5 h-3.5 text-slate-400" />
+              <label className="block text-xs font-medium text-black/75 mb-1 flex items-center space-x-1">
+                <AtSign className="w-3.5 h-3.5 text-black/50" />
                 <span>Builder Handle *</span>
               </label>
               <input
@@ -230,22 +230,22 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 placeholder="@username"
                 value={handle}
                 onChange={(e) => setHandle(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition font-mono"
+                className="w-full bg-black/[0.02] border border-black/10 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-black/85 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition font-mono"
               />
             </div>
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1 flex items-center space-x-1">
-              <Tag className="w-3.5 h-3.5 text-slate-400" />
+            <label className="block text-xs font-medium text-black/75 mb-1 flex items-center space-x-1">
+              <Tag className="w-3.5 h-3.5 text-black/50" />
               <span>Kategori Proyek</span>
             </label>
             <select
               id="select-project-category"
               value={category}
               onChange={(e) => setCategory(e.target.value as ProjectCategory)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
+              className="w-full bg-black/[0.02] border border-black/10 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-black/85 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
             >
               {CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>
@@ -257,7 +257,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
 
           {/* Tagline / Deskripsi */}
           <div>
-            <label className="block text-xs font-medium text-slate-700 mb-1">
+            <label className="block text-xs font-medium text-black/75 mb-1">
               Deskripsi Singkat / Tagline
             </label>
             <textarea
@@ -266,13 +266,13 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
               placeholder="Jelaskan nilai inovasi atau fitur utama proyekmu..."
               value={tagline}
               onChange={(e) => setTagline(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-base sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
+              className="w-full bg-black/[0.02] border border-black/10 rounded-lg px-3.5 py-2 text-base sm:text-sm text-black/85 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#071E49] focus:bg-white transition"
             />
           </div>
 
           {/* Live Preview Card */}
-          <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-xl">
-            <div className="text-[11px] font-medium text-slate-500 mb-1 flex items-center space-x-1">
+          <div className="bg-black/[0.02] border border-black/10 p-3.5 rounded-lg">
+            <div className="text-[11px] font-medium text-black/50 mb-1 flex items-center space-x-1">
               <Sparkles className="w-3.5 h-3.5 text-[#D1B06C]" />
               <span>Pratinjau di Papan Peringkat</span>
             </div>
@@ -281,18 +281,18 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 <div className="font-semibold text-sm text-[#071E49]">
                   {name || 'Nama Proyekmu'}
                 </div>
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-black/50">
                   {tagline || 'Deskripsi singkat inovasimu akan muncul di sini...'}
                 </div>
               </div>
-              <span className="text-xs font-mono text-slate-600 bg-white px-2 py-0.5 rounded border border-slate-200">
+              <span className="text-xs font-mono text-black/65 bg-white px-2 py-0.5 rounded border border-black/10">
                 {handle || '@handle'}
               </span>
             </div>
           </div>
 
           {/* Prohibited Content Rules Box */}
-          <div className="bg-amber-50/80 border border-amber-200/80 rounded-xl p-3.5 space-y-1.5 text-xs text-amber-900">
+          <div className="bg-amber-50/80 border border-amber-200/80 rounded-lg p-3.5 space-y-1.5 text-xs text-amber-900">
             <div className="font-semibold flex items-center space-x-1.5 text-amber-950">
               <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0" />
               <span>Aturan Konten & Larangan Proyek</span>
@@ -308,7 +308,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
               id="btn-confirm-submit-project"
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#071E49] hover:bg-[#0c2a63] disabled:opacity-60 text-white font-medium text-sm py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-[0.98] min-h-[44px]"
+              className="w-full bg-black hover:bg-black/85 disabled:opacity-50 text-white font-medium text-sm py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-[0.98] min-h-[44px]"
             >
               {isSubmitting ? (
                 <>
@@ -322,7 +322,7 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                 </>
               )}
             </button>
-            <p className="text-center text-xs text-slate-500 mt-2">
+            <p className="text-center text-xs text-black/50 mt-2">
               Proyek tersimpan secara global di Cloud Firestore dan langsung dapat dimainkan semua orang.
             </p>
           </div>

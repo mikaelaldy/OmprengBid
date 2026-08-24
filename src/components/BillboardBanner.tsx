@@ -24,18 +24,18 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-[#071E49] via-[#0B2556] to-[#071E49] border border-slate-700/70 rounded-2xl shadow-sm text-white">
+    <div className="relative overflow-hidden bg-white border border-black/10 rounded-lg text-black">
       {/* Top Banner Ribbon */}
-      <div className="bg-[#051636]/90 text-slate-300 px-5 py-2.5 flex items-center justify-between text-xs border-b border-slate-800">
+      <div className="bg-black/[0.03] text-black/65 px-5 py-2.5 flex items-center justify-between text-xs border-b border-black/10">
         <div className="flex items-center space-x-2">
           <Flame className="w-3.5 h-3.5 text-orange-400" />
-          <span className="font-semibold text-slate-100 tracking-wide">SPOT UTAMA #1</span>
+          <span className="font-semibold text-black tracking-wide">SPOT UTAMA #1</span>
         </div>
         <div className="flex items-center space-x-2 text-xs">
-          <span className="hidden sm:inline text-slate-400">
+          <span className="hidden sm:inline text-black/50">
             Didukung builder komunitas dengan rekor {rank1Project.bestScore.toLocaleString()} pts
           </span>
-          <span className="bg-[#D1B06C]/10 text-[#D1B06C] border border-[#D1B06C]/30 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
+          <span className="bg-[#D1B06C]/15 text-[#D1B06C] border border-[#D1B06C]/30 px-2 py-0.5 rounded text-[11px] font-mono font-medium">
             Live #1
           </span>
         </div>
@@ -49,12 +49,12 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
           <div className="lg:col-span-8 space-y-3.5">
             {/* Badges & Category */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="bg-slate-800/80 border border-slate-700 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
+              <span className="bg-black/[0.04] border border-black/10 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
                 <Crown className="w-3.5 h-3.5 text-[#D1B06C]" />
                 <span>Juara Bertahan</span>
               </span>
 
-              <span className="bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-medium px-2.5 py-1 rounded-md">
+              <span className="bg-black/[0.03] border border-black/10 text-black/65 text-xs font-medium px-2.5 py-1 rounded-md">
                 {rank1Project.category}
               </span>
 
@@ -76,7 +76,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
                   {rank1Project.handle}
                 </span>
               </div>
-              <p className="text-slate-300 text-sm font-normal mt-1.5 max-w-2xl leading-relaxed">
+              <p className="text-black/65 text-sm font-normal mt-1.5 max-w-2xl leading-relaxed">
                 {rank1Project.tagline}
               </p>
             </div>
@@ -84,39 +84,39 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-3 gap-2 pt-1 max-w-lg">
               {/* Best Score */}
-              <div className="bg-slate-800/60 border border-slate-700/80 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
-                <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate">
+              <div className="bg-black/[0.03] border border-black/10 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
+                <div className="text-[10px] sm:text-[11px] text-black/50 font-medium truncate">
                   Rekor Skor
                 </div>
-                <div className="text-base sm:text-2xl font-bold text-white font-mono flex items-baseline justify-center sm:justify-start space-x-0.5 sm:space-x-1 mt-0.5">
+                <div className="text-base sm:text-2xl font-bold text-black font-mono flex items-baseline justify-center sm:justify-start space-x-0.5 sm:space-x-1 mt-0.5">
                   <span className="truncate">{rank1Project.bestScore.toLocaleString()}</span>
                   <span className="text-[10px] sm:text-xs text-[#D1B06C] font-sans font-medium">pts</span>
                 </div>
               </div>
 
               {/* Total Runs */}
-              <div className="bg-slate-800/60 border border-slate-700/80 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
-                <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate">
+              <div className="bg-black/[0.03] border border-black/10 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
+                <div className="text-[10px] sm:text-[11px] text-black/50 font-medium truncate">
                   Total Ronde
                 </div>
-                <div className="text-base sm:text-2xl font-bold text-white font-mono mt-0.5">
+                <div className="text-base sm:text-2xl font-bold text-black font-mono mt-0.5">
                   {rank1Project.runsCount}
                 </div>
-                <div className="text-[9px] sm:text-[11px] text-slate-400 font-mono hidden sm:block">
+                <div className="text-[9px] sm:text-[11px] text-black/50 font-mono hidden sm:block">
                   permainan
                 </div>
               </div>
 
               {/* Live Clicks */}
-              <div className="bg-slate-800/60 border border-slate-700/80 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
-                <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium truncate flex items-center justify-center sm:justify-start space-x-1">
+              <div className="bg-black/[0.03] border border-black/10 p-2 sm:px-3.5 sm:py-2 rounded-xl text-center sm:text-left">
+                <div className="text-[10px] sm:text-[11px] text-black/50 font-medium truncate flex items-center justify-center sm:justify-start space-x-1">
                   <MousePointerClick className="w-3 h-3 text-[#D1B06C] shrink-0 hidden sm:inline" />
                   <span className="truncate">Kunjungan</span>
                 </div>
                 <div className="text-base sm:text-2xl font-bold text-[#D1B06C] font-mono mt-0.5">
                   {rank1Project.clicksCount}
                 </div>
-                <div className="text-[9px] sm:text-[11px] text-slate-400 font-mono hidden sm:block">
+                <div className="text-[9px] sm:text-[11px] text-black/50 font-mono hidden sm:block">
                   klik langsung
                 </div>
               </div>
@@ -132,7 +132,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
                 sound.playClick();
                 onPlayProject();
               }}
-              className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold text-xs sm:text-sm px-4 py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+              className="w-full bg-black hover:bg-black/85 text-white font-medium text-xs sm:text-sm px-4 py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 text-center"
             >
               <Play className="w-4 h-4 fill-current text-[#071E49]" />
               <span>Main Sekarang & Tantang #1</span>
@@ -156,7 +156,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               <button
                 id="btn-boost-rank1-directly"
                 onClick={() => onPlayProject(rank1Project)}
-                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95 truncate"
+                className="bg-white hover:bg-black/5 text-black/80 hover:text-black font-medium text-[11px] px-2.5 py-2 rounded-lg border border-black/10 flex items-center justify-center space-x-1 transition active:scale-95 truncate"
               >
                 <span>Dukung #{rank1Project.name}</span>
               </button>
@@ -164,7 +164,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
               <button
                 id="btn-choose-other-project"
                 onClick={onSelectProject}
-                className="bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 hover:text-white font-medium text-[11px] px-2.5 py-2 rounded-lg border border-slate-700 flex items-center justify-center space-x-1 transition active:scale-95"
+                className="bg-white hover:bg-black/5 text-black/80 hover:text-black font-medium text-[11px] px-2.5 py-2 rounded-lg border border-black/10 flex items-center justify-center space-x-1 transition active:scale-95"
               >
                 <span>Pilih Proyek Lain</span>
               </button>
