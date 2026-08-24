@@ -148,7 +148,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
           <button
             onClick={onClose}
-            className="bg-black hover:bg-black/85 text-white font-medium text-xs py-2 px-5 rounded-lg transition active:scale-95 shadow-xs"
+            className="bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-xs py-2 px-5 rounded-lg transition active:scale-95 shadow-xs"
           >
             Tutup
           </button>

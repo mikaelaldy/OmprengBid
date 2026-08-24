@@ -49,7 +49,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
           <div className="lg:col-span-8 space-y-3.5">
             {/* Badges & Category */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="bg-black/[0.04] border border-black/10 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
+              <span className="bg-[#D1B06C]/10 border border-[#D1B06C]/30 text-[#D1B06C] text-xs font-medium px-2.5 py-1 rounded-md flex items-center space-x-1.5">
                 <Crown className="w-3.5 h-3.5 text-[#D1B06C]" />
                 <span>Juara Bertahan</span>
               </span>
@@ -132,7 +132,7 @@ export const BillboardBanner: React.FC<BillboardBannerProps> = ({
                 sound.playClick();
                 onPlayProject();
               }}
-              className="w-full bg-black hover:bg-black/85 text-white font-medium text-xs sm:text-sm px-4 py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 text-center"
+              className="w-full bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-xs sm:text-sm px-4 py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 text-center"
             >
               <Play className="w-4 h-4 fill-current text-[#071E49]" />
               <span>Main Sekarang & Tantang #1</span>

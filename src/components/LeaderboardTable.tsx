@@ -340,7 +340,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                         sound.playClick();
                         onPlayProject(p);
                       }}
-                      className="flex-1 bg-black hover:bg-black/85 text-white text-xs font-medium py-2 rounded-lg flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[40px]"
+                      className="flex-1 bg-[#071E49] hover:bg-[#0A2558] text-white text-xs font-medium py-2 rounded-lg flex items-center justify-center space-x-1.5 transition active:scale-95 min-h-[40px]"
                     >
                       <Play className="w-3.5 h-3.5 text-black fill-current" />
                       <span>Mainkan</span>
@@ -765,7 +765,7 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
                       setUnauthorizedProject(null);
                       onOpenAdmin();
                     }}
-                    className="w-full sm:flex-1 bg-black hover:bg-black/85 text-white font-medium text-xs py-2.5 px-4 rounded-lg transition flex items-center justify-center space-x-2 active:scale-95"
+                    className="w-full sm:flex-1 bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-xs py-2.5 px-4 rounded-lg transition flex items-center justify-center space-x-2 active:scale-95"
                   >
                     <Shield className="w-3.5 h-3.5 text-black" />
                     <span>Buka Portal Admin</span>

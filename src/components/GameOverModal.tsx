@@ -184,7 +184,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                     sound.playClick();
                     onRegisterProject(score);
                   }}
-                  className="w-full bg-black hover:bg-black/85 text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-lg shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 mt-1 min-h-[44px]"
+                  className="w-full bg-[#071E49] hover:bg-[#0A2558] text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-lg shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 mt-1 min-h-[44px]"
                 >
                   <Plus className="w-4 h-4 text-black" />
                   <span>Pasang Proyek Pake Rekor Ini</span>
@@ -239,7 +239,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
               <button
                 id="btn-share-twitter"
                 onClick={handleShareTwitter}
-                className="w-full bg-black hover:bg-black/85 text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95 min-h-[42px]"
+                className="w-full bg-[#071E49] hover:bg-[#0A2558] text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95 min-h-[42px]"
               >
                 <svg className="w-3.5 h-3.5 fill-current text-black" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -296,7 +296,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                 sound.playClick();
                 onPlayAgain();
               }}
-              className="w-full bg-black hover:bg-black/85 text-white font-medium text-sm py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 min-h-[48px]"
+              className="w-full bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-sm py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95 min-h-[48px]"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Main Lagi (Tumpuk Ulang)</span>

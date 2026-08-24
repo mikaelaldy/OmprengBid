@@ -330,7 +330,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 type="button"
                 disabled={isAuthenticating}
                 onClick={handleLoginGoogle}
-                className="w-full w-full bg-black hover:bg-black/85 text-white font-medium text-sm py-3 px-4 rounded-lg transition flex items-center justify-center space-x-2 active:scale-95 disabled:opacity-50"
+                className="w-full w-full bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-sm py-3 px-4 rounded-lg transition flex items-center justify-center space-x-2 active:scale-95 disabled:opacity-50"
               >
                 <Shield className="w-4 h-4" />
                 <span>{isAuthenticating ? 'Memverifikasi...' : 'Masuk via Akun Moderator'}</span>
@@ -456,7 +456,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
                 />
                 <button
                   type="submit"
-                  className="bg-black hover:bg-black/85 text-white font-medium text-xs px-4 py-2 rounded-lg transition"
+                  className="bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-xs px-4 py-2 rounded-lg transition"
                 >
                   Uji Filter
                 </button>

@@ -70,7 +70,7 @@ export const SelectProjectModal: React.FC<SelectProjectModalProps> = ({
               onClose();
               onOpenSubmit();
             }}
-            className="bg-black hover:bg-black/85 text-white text-xs font-medium px-3 sm:px-3.5 py-2.5 rounded-lg flex items-center space-x-1.5 shrink-0 transition min-h-[40px]"
+            className="bg-[#071E49] hover:bg-[#0A2558] text-white text-xs font-medium px-3 sm:px-3.5 py-2.5 rounded-lg flex items-center space-x-1.5 shrink-0 transition min-h-[40px]"
           >
             <Plus className="w-3.5 h-3.5 text-[#D1B06C]" />
             <span className="hidden xs:inline">Proyek Baru</span>

@@ -186,7 +186,7 @@ export const RegulationsModal: React.FC<RegulationsModalProps> = ({
         <div className="p-4 sm:p-5 bg-white border-t border-black/10 flex justify-end shrink-0">
           <button
             onClick={onClose}
-            className="bg-black hover:bg-black/85 text-white font-medium text-xs py-2.5 px-6 rounded-lg transition active:scale-95"
+            className="bg-[#071E49] hover:bg-[#0A2558] text-white font-medium text-xs py-2.5 px-6 rounded-lg transition active:scale-95"
           >
             Mengerti & Tutup
           </button>

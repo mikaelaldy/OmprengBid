@@ -113,8 +113,8 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div>
             <div className="flex items-center space-x-1.5">
-              <h1 className="text-black text-lg sm:text-2xl font-bold tracking-tight">
-                Ompreng<span className="text-black">Bid</span>
+              <h1 className="text-[#071E49] text-lg sm:text-2xl font-bold tracking-tight">
+                Ompreng<span className="text-[#D1B06C]">Bid</span>
               </h1>
             </div>
             <p className="text-black/50 text-[10px] sm:text-xs font-normal truncate max-w-[130px] sm:max-w-none">
@@ -259,7 +259,7 @@ export const Header: React.FC<HeaderProps> = ({
               sound.playClick();
               if (onStartGame) onStartGame();
             }}
-            className="bg-black hover:bg-black/85 text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-1.5 transition active:scale-95 shrink-0"
+            className="bg-[#071E49] hover:bg-[#0A2558] text-white font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm flex items-center space-x-1 sm:space-x-1.5 transition active:scale-95 shrink-0"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>Main</span>
