@@ -290,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
                 setMobileMenuOpen(false);
                 onOpenSubmit();
               }}
-              className="flex items-center justify-center space-x-1.5 p-2.5 bg-black/5 text-white rounded-xl text-xs font-semibold border border-black/10 hover:bg-black/10 active:scale-95 transition"
+              className="flex items-center justify-center space-x-1.5 p-2.5 bg-black/5 text-black/80 rounded-lg text-xs font-medium border border-black/10 hover:bg-black/10 active:scale-95 transition"
             >
               <Plus className="w-3.5 h-3.5 text-black" />
               <span>Daftar Proyek</span>
