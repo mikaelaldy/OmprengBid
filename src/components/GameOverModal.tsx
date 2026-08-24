@@ -104,60 +104,60 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-150">
-      <div className="bg-white rounded-lg max-w-lg w-full overflow-hidden border border-black/10 shadow-xl animate-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#071E49]/70 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="bg-white rounded-2xl max-w-lg w-full overflow-hidden border border-slate-200 shadow-2xl animate-in zoom-in-95 duration-150 flex flex-col max-h-[92dvh]">
         
         {/* Banner Header */}
-        <div className="bg-white p-5 sm:p-6 text-center text-black relative overflow-hidden border-b border-black/10">
+        <div className="bg-[#071E49] p-4 sm:p-6 text-center text-white relative overflow-hidden border-b border-slate-700 shrink-0">
           {isNewRank1 && (
-            <div className="inline-flex items-center space-x-1.5 bg-[#D1B06C] text-black px-3 py-1 rounded-full text-xs font-semibold tracking-wide mb-2.5 shadow-sm">
+            <div className="inline-flex items-center space-x-1.5 bg-[#D1B06C] text-[#071E49] px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-2 shadow-sm">
               <Trophy className="w-3.5 h-3.5" />
               <span>Peringkat #1 Baru!</span>
             </div>
           )}
 
-          <div className="text-xs text-black/60 font-medium">
+          <div className="text-xs text-[#D1B06C] font-medium">
             Sesi Tumpukan Ompreng Selesai
           </div>
 
           {/* Primary High-Impact Stats Row */}
-          <div className="mt-2 grid grid-cols-3 gap-2 divide-x divide-black/10 bg-black/[0.03] border border-black/10 p-3 rounded-xl">
+          <div className="mt-2 grid grid-cols-3 gap-1.5 sm:gap-2 divide-x divide-slate-700/80 bg-slate-800/60 border border-slate-700/80 p-2.5 sm:p-3 rounded-xl">
             {/* Score */}
             <div>
-              <div className="text-[11px] text-black/45 font-medium">
+              <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium">
                 Total Skor
               </div>
-              <div className="text-xl sm:text-2xl font-bold font-mono text-black mt-0.5">
+              <div className="text-lg sm:text-2xl font-bold font-mono text-white mt-0.5">
                 {score.toLocaleString()}
               </div>
-              <div className="text-[10px] text-black/50 font-sans font-medium">
+              <div className="text-[10px] text-[#D1B06C] font-sans font-medium">
                 pts
               </div>
             </div>
 
             {/* Trays Stacked */}
-            <div className="pl-2">
-              <div className="text-[11px] text-black/45 font-medium">
-                Tumpukan Ompreng
+            <div className="pl-1.5 sm:pl-2">
+              <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium">
+                Tumpukan
               </div>
-              <div className="text-xl sm:text-2xl font-bold font-mono text-black mt-0.5">
+              <div className="text-lg sm:text-2xl font-bold font-mono text-white mt-0.5">
                 {traysStacked}
               </div>
-              <div className="text-[10px] text-black/45 font-mono">
+              <div className="text-[10px] text-slate-400 font-mono">
                 {heightMeters} m
               </div>
             </div>
 
             {/* Highest Combo Multiplier */}
-            <div className="pl-2">
-              <div className="text-[11px] text-black/45 font-medium">
+            <div className="pl-1.5 sm:pl-2">
+              <div className="text-[10px] sm:text-[11px] text-slate-400 font-medium">
                 Max Combo
               </div>
-              <div className="text-xl sm:text-2xl font-bold font-mono text-black/60 mt-0.5 flex items-center justify-center space-x-0.5">
-                <Flame className="w-4 h-4 text-black/45 inline" />
+              <div className="text-lg sm:text-2xl font-bold font-mono text-[#D1B06C] mt-0.5 flex items-center justify-center space-x-0.5">
+                <Flame className="w-3.5 h-3.5 text-orange-400 inline" />
                 <span>x{maxCombo}</span>
               </div>
-              <div className="text-[10px] text-black/45">
+              <div className="text-[9px] sm:text-[10px] text-slate-400">
                 {perfectDrops} presisi ({precisionPercent}%)
               </div>
             </div>
@@ -165,70 +165,70 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="p-5 sm:p-6 space-y-4 overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-y-auto flex-1">
           
           {/* If Guest Mode: Call to Action to Register Project with this Score */}
           {isGuestMode ? (
-            <div className="bg-black/[0.03] border border-black/10 p-4 rounded-xl space-y-2">
-              <div className="flex items-center space-x-2 text-black">
-                <Sparkles className="w-4 h-4 text-black/50" />
-                <span className="font-bold text-sm">Punya Proyek atau Side-Project?</span>
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 border border-[#D1B06C]/40 p-3.5 sm:p-4 rounded-xl space-y-2">
+              <div className="flex items-center space-x-2 text-[#071E49]">
+                <Sparkles className="w-4 h-4 text-[#D1B06C]" />
+                <span className="font-bold text-xs sm:text-sm">Punya Proyek atau Side-Project?</span>
               </div>
-              <p className="text-xs text-black/65 leading-relaxed">
-                Klaim rekor <strong className="text-black">{traysStacked} ompreng ({score.toLocaleString()} pts)</strong> ini buat jadi modal awal startup lu di leaderboard. Langsung nongkrong di ranking atas tanpa mulai dari nol!
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Klaim rekor <strong className="text-[#071E49]">{traysStacked} ompreng ({score.toLocaleString()} pts)</strong> ini buat modal awal startup lu di leaderboard!
               </p>
               {onRegisterProject && (
                 <button
                   id="btn-claim-score-register"
                   onClick={() => {
                     sound.playClick();
-                    onRegisterProject(traysStacked);
+                    onRegisterProject(score);
                   }}
-                  className="w-full bg-black hover:bg-neutral-800 text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-lg shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 mt-1"
+                  className="w-full bg-[#071E49] hover:bg-[#0c2a63] text-white font-semibold text-xs sm:text-sm py-2.5 px-4 rounded-lg shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 mt-1 min-h-[44px]"
                 >
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-4 h-4 text-[#D1B06C]" />
                   <span>Pasang Proyek Pake Rekor Ini</span>
                 </button>
               )}
             </div>
           ) : (
             /* Project Summary Card */
-            <div className="bg-black/[0.02] border border-black/10 p-3.5 rounded-xl flex items-center justify-between">
-              <div className="space-y-0.5">
-                <div className="text-[11px] text-black/55 font-medium">
+            <div className="bg-slate-50 border border-slate-200 p-3 sm:p-3.5 rounded-xl flex items-center justify-between">
+              <div className="space-y-0.5 truncate pr-2">
+                <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium">
                   Proyek yang Didukung
                 </div>
-                <div className="text-sm font-semibold text-black flex items-center space-x-1.5">
-                  <span>{project.name}</span>
-                  {project.verified && <ShieldCheck className="w-3.5 h-3.5 text-black/40" />}
+                <div className="text-xs sm:text-sm font-semibold text-[#071E49] flex items-center space-x-1.5 truncate">
+                  <span className="truncate">{project.name}</span>
+                  {project.verified && <ShieldCheck className="w-3.5 h-3.5 text-[#D1B06C] shrink-0" />}
                 </div>
-                <div className="text-xs text-black/55 font-mono">
+                <div className="text-[11px] sm:text-xs text-slate-500 font-mono truncate">
                   {project.handle}
                 </div>
               </div>
 
-              <div className="text-right">
-                <div className="text-[11px] text-black/55 font-medium">
+              <div className="text-right shrink-0">
+                <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium">
                   Peringkat
                 </div>
-                <div className="text-xl font-bold font-mono text-black">
+                <div className="text-lg sm:text-xl font-bold font-mono text-[#071E49]">
                   #{currentRank}
                 </div>
-                <div className="text-[11px] font-mono text-black/60 font-semibold">
-                  Rekor: {project.bestScore} ompreng
+                <div className="text-[10px] sm:text-[11px] font-mono text-[#D1B06C] font-semibold">
+                  Rekor: {project.bestScore.toLocaleString()} pts
                 </div>
               </div>
             </div>
           )}
 
           {/* Prominent Share Your Score Section */}
-          <div className="bg-black/[0.03] border border-black/10 p-4 rounded-xl space-y-2.5">
+          <div className="bg-[#071E49]/5 border border-[#071E49]/10 p-3.5 sm:p-4 rounded-xl space-y-2.5">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-1.5 text-xs font-semibold text-black">
-                <Share2 className="w-4 h-4 text-black/50" />
+              <div className="flex items-center space-x-1.5 text-xs font-semibold text-[#071E49]">
+                <Share2 className="w-4 h-4 text-[#D1B06C]" />
                 <span>Pamerkan Rekor Anda</span>
               </div>
-              <span className="text-[11px] text-black/55">
+              <span className="text-[10px] sm:text-[11px] text-slate-500">
                 Ajak Komunitas
               </span>
             </div>
@@ -239,9 +239,9 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
               <button
                 id="btn-share-twitter"
                 onClick={handleShareTwitter}
-                className="w-full bg-black hover:bg-neutral-800 text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95"
+                className="w-full bg-[#071E49] hover:bg-[#0c2a63] text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95 min-h-[42px]"
               >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 fill-current text-[#D1B06C]" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 <span>Bagikan ke X</span>
@@ -251,7 +251,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
               <button
                 id="btn-share-discord"
                 onClick={handleCopyDiscord}
-                className="w-full bg-black hover:bg-neutral-800 text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 transition shadow-xs active:scale-95 min-h-[42px]"
               >
                 {copiedType === 'discord' ? (
                   <>
@@ -260,7 +260,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-3.5 h-3.5 text-indigo-200" />
                     <span>Salin Format Discord</span>
                   </>
                 )}
@@ -271,7 +271,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
             <button
               id="btn-share-link"
               onClick={handleShareGeneral}
-              className="w-full bg-white hover:bg-black/[0.04] text-black border border-black/10 text-xs font-medium py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition"
+              className="w-full bg-white hover:bg-slate-100 text-[#071E49] border border-slate-200 text-xs font-medium py-2 px-3 rounded-lg flex items-center justify-center space-x-1.5 transition min-h-[38px]"
             >
               {copiedType === 'link' ? (
                 <>
@@ -280,8 +280,8 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                 </>
               ) : (
                 <>
-                  <ExternalLink className="w-3.5 h-3.5 text-black/40" />
-                  <span>Salin Pesan / Buka Menu Berbagi</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-[#D1B06C]" />
+                  <span>Salin Pesan / Menu Berbagi</span>
                 </>
               )}
             </button>
@@ -296,7 +296,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                 sound.playClick();
                 onPlayAgain();
               }}
-              className="w-full bg-black hover:bg-neutral-800 text-white font-semibold text-sm py-3 rounded-lg flex items-center justify-center space-x-2 transition active:scale-95"
+              className="w-full bg-[#D1B06C] hover:bg-[#c4a15b] text-[#071E49] font-bold text-sm py-3 rounded-xl shadow-xs flex items-center justify-center space-x-2 transition active:scale-95 min-h-[48px]"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Main Lagi (Tumpuk Ulang)</span>
@@ -309,24 +309,24 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
                 sound.playClick();
                 onOpenCertificate();
               }}
-              className="w-full bg-black/[0.05] hover:bg-black/[0.09] text-black font-medium text-xs py-2.5 px-3 rounded-xl border border-black/10 flex items-center justify-center space-x-1.5 transition"
+              className="w-full bg-slate-100 hover:bg-slate-200 text-[#071E49] font-semibold text-xs py-2.5 px-3 rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition min-h-[42px]"
             >
-              <Award className="w-4 h-4 text-black/50" />
+              <Award className="w-4 h-4 text-[#D1B06C]" />
               <span>Lihat Kartu Bukti Rekor</span>
             </button>
 
             {/* Bottom Nav Links */}
-            <div className="flex items-center justify-between pt-2 text-xs text-black/55">
+            <div className="flex flex-col xs:flex-row items-center justify-between gap-2 pt-2 text-xs text-slate-500 text-center">
               <button
                 onClick={onChangeProject}
-                className="hover:text-black transition underline-offset-2 hover:underline"
+                className="hover:text-[#071E49] transition underline-offset-2 hover:underline py-1"
               >
                 {isGuestMode ? 'Tautkan ke Proyek di Leaderboard' : 'Pilih Proyek Lain'}
               </button>
 
               <button
                 onClick={onClose}
-                className="text-black font-medium hover:underline flex items-center space-x-1"
+                className="text-[#071E49] font-medium hover:underline flex items-center space-x-1 py-1"
               >
                 <span>Kembali ke Papan Peringkat</span>
                 <ArrowRight className="w-3.5 h-3.5" />

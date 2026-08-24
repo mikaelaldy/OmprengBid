@@ -14,6 +14,7 @@ import { GameOverModal } from './components/GameOverModal';
 import { CertificateModal } from './components/CertificateModal';
 import { RegulationsModal } from './components/RegulationsModal';
 import { TutorialModal } from './components/TutorialModal';
+import { AdminPortal } from './components/AdminPortal';
 import { Project } from './types';
 import {
   loadCachedProjects,
@@ -25,10 +26,20 @@ import {
   subscribeToSiteStats,
   SiteStats,
 } from './utils/storage';
-import { Trophy, Sparkles, ExternalLink } from 'lucide-react';
+import { Trophy, Sparkles, ExternalLink, Shield } from 'lucide-react';
 import { trackGameStart, trackGameOver } from './lib/analytics';
 
 export default function App() {
+  const [currentRoute, setCurrentRoute] = useState<'/' | '/admin'>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (path === '/admin' || path.startsWith('/admin') || hash === '#admin') {
+        return '/admin';
+      }
+    }
+    return '/';
+  });
 
   const [projects, setProjects] = useState<Project[]>(() => loadCachedProjects());
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -50,6 +61,34 @@ export default function App() {
   const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
   const [isGameOverOpen, setIsGameOverOpen] = useState<boolean>(false);
   const [isCertificateOpen, setIsCertificateOpen] = useState<boolean>(false);
+
+  // Route navigation helper
+  const navigateTo = (route: '/' | '/admin') => {
+    if (typeof window !== 'undefined') {
+      window.history.pushState(null, '', route);
+    }
+    setCurrentRoute(route);
+  };
+
+  // Browser back/forward button routing listener
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      if (path === '/admin' || path.startsWith('/admin') || hash === '#admin') {
+        setCurrentRoute('/admin');
+      } else {
+        setCurrentRoute('/');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
 
   // Last run stats
   const [lastGameResult, setLastGameResult] = useState<{
@@ -127,7 +166,7 @@ export default function App() {
     perfectDrops: number;
     heightMeters: number;
   }) => {
-    const scoreVal = stats.traysStacked || stats.score;
+    const scoreVal = stats.score;
 
     if (activeProject) {
       const playerHandle = getStoredPlayerHandle() || activeProject.handle;
@@ -206,6 +245,17 @@ export default function App() {
     setIsCertificateOpen(true);
   };
 
+  if (currentRoute === '/admin') {
+    return (
+      <AdminPortal
+        projects={projects}
+        siteStats={siteStats}
+        liveVisitors={liveVisitors}
+        onNavigateHome={() => navigateTo('/')}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white flex flex-col text-black">
       {/* 1. Official Header */}
@@ -217,6 +267,7 @@ export default function App() {
         onOpenRegulations={() => setIsRegulationsOpen(true)}
         onOpenTutorial={() => setIsTutorialOpen(true)}
         onStartGame={() => handleStartGame(null)}
+        onOpenAdmin={() => navigateTo('/admin')}
         liveVisitors={liveVisitors}
         totalVisitors={siteStats.totalVisitors}
       />
@@ -261,6 +312,7 @@ export default function App() {
           projects={projects}
           onPlayProject={handleStartGame}
           onOpenSubmit={() => setIsSubmitModalOpen(true)}
+          onOpenAdmin={() => navigateTo('/admin')}
         />
 
       </main>
@@ -302,7 +354,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4 text-xs">
+          <div className="flex flex-wrap items-center gap-4 text-xs">
             <button
               onClick={() => setIsTutorialOpen(true)}
               className="text-black/55 hover:text-black transition"
@@ -322,6 +374,14 @@ export default function App() {
               className="text-black/55 hover:text-black transition"
             >
               Daftar Proyek Baru
+            </button>
+            <span>•</span>
+            <button
+              onClick={() => navigateTo('/admin')}
+              className="text-slate-400 hover:text-[#D1B06C] transition inline-flex items-center space-x-1 font-mono"
+            >
+              <Shield className="w-3 h-3" />
+              <span>Portal Admin</span>
             </button>
           </div>
         </div>

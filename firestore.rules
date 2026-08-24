@@ -3,11 +3,29 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /projects/{projectId} {
       allow read: if true;
-      allow create: if request.resource.data.name is string 
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 40
                     && request.resource.data.handle is string
-                    && request.resource.data.url is string;
-      allow update: if true;
-      allow delete: if false;
+                    && request.resource.data.handle.size() > 0 && request.resource.data.handle.size() <= 30
+                    && request.resource.data.url is string
+                    && request.resource.data.url.size() > 0 && request.resource.data.url.size() <= 200
+                    && request.resource.data.bestScore is number
+                    && request.resource.data.dailyBestScore is number
+                    && request.resource.data.runsCount is number
+                    && request.resource.data.clicksCount is number;
+
+      allow update: if 
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['bestScore', 'dailyBestScore', 'dailyBestDate', 'runsCount', 'clicksCount', 'updatedAt', 'lastPlayer'])
+          && (!('bestScore' in request.resource.data) || request.resource.data.bestScore >= resource.data.bestScore)
+          && (!('runsCount' in request.resource.data) || request.resource.data.runsCount >= resource.data.runsCount)
+          && (!('clicksCount' in request.resource.data) || request.resource.data.clicksCount >= resource.data.clicksCount);
+          
+      allow delete: if request.auth != null && (
+        request.auth.token.email == 'mikaelaldy56@gmail.com' ||
+        (resource.data.creatorEmail != null && request.auth.token.email == resource.data.creatorEmail) ||
+        (resource.data.creatorId != null && request.auth.uid == resource.data.creatorId) ||
+        (!('creatorEmail' in resource.data) && !('creatorId' in resource.data))
+      );
     }
 
     match /site_stats/{statId} {

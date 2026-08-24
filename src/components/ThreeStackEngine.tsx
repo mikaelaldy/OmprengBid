@@ -255,7 +255,7 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
       // Base pedestal badge
       const rim = new THREE.LineSegments(
         new THREE.EdgesGeometry(geometry),
-        new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 1.5 })
+        new THREE.LineBasicMaterial({ color: 0x071E49, linewidth: 1.5 })
       );
       mesh.add(rim);
     }
@@ -290,9 +290,13 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
     scene.background = new THREE.Color(0xF8FAFC);
     sceneRef.current = scene;
 
-    // 2. Camera (2.5D Isometric Orthographic)
+    // 2. Camera (2.5D Isometric Orthographic - responsive to mobile aspect ratio)
     const aspect = width / height;
-    const d = 5.8;
+    // Adapt frustum on portrait mobile screens so moving ompreng doesn't slide off-screen
+    const getFrustumD = (asp: number) => {
+      return asp < 1 ? 5.8 / Math.sqrt(Math.max(asp, 0.35)) : 5.8;
+    };
+    const d = getFrustumD(aspect);
     const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
     camera.position.set(18, 18, 18);
     camera.lookAt(0, 0, 0);
@@ -429,10 +433,11 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
       const w = containerRef.current.clientWidth;
       const h = containerRef.current.clientHeight;
       const asp = w / h;
-      cameraRef.current.left = -d * asp;
-      cameraRef.current.right = d * asp;
-      cameraRef.current.top = d;
-      cameraRef.current.bottom = -d;
+      const frustumD = getFrustumD(asp);
+      cameraRef.current.left = -frustumD * asp;
+      cameraRef.current.right = frustumD * asp;
+      cameraRef.current.top = frustumD;
+      cameraRef.current.bottom = -frustumD;
       cameraRef.current.updateProjectionMatrix();
       rendererRef.current.setSize(w, h);
     };
@@ -705,94 +710,98 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
 
   return (
     <div
-      className="relative w-full h-full select-none cursor-pointer overflow-hidden bg-[#F1F5F9]"
-      onClick={handleDrop}
+      className="relative w-full h-full select-none cursor-pointer overflow-hidden bg-[#F1F5F9] touch-none"
+      onPointerDown={(e) => {
+        // Prevent ghost click and enable zero-latency response on touch
+        e.preventDefault();
+        handleDrop();
+      }}
     >
       {/* Giant Minimalist Background Stack Counter */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-10 select-none">
-        <span className="text-black/10 text-7xl sm:text-8xl md:text-9xl font-bold tabular-nums tracking-tight leading-none font-mono">
+      <div className="absolute top-10 sm:top-12 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-10 select-none">
+        <span className="text-slate-300/40 text-6xl sm:text-8xl md:text-9xl font-bold tabular-nums tracking-tight leading-none font-mono">
           {String(traysStacked).padStart(2, '0')}
         </span>
-        <p className="text-[11px] font-medium text-black/55 bg-white/80 border border-black/10 px-3 py-0.5 rounded-full shadow-xs -mt-1">
+        <p className="text-[10px] sm:text-[11px] font-medium text-slate-500 bg-white/80 border border-slate-200 px-2.5 sm:px-3 py-0.5 rounded-full shadow-xs -mt-1">
           Tumpukan Ompreng
         </p>
       </div>
 
       {/* 3D WebGL Canvas Container */}
-      <div ref={containerRef} className="w-full h-full relative z-0" />
+      <div ref={containerRef} className="w-full h-full relative z-0 touch-none" />
 
       {/* Top HUD: Current Project & Score Display */}
-      <div className="absolute top-4 inset-x-4 flex items-start justify-between pointer-events-none z-20">
+      <div className="absolute top-3 sm:top-4 inset-x-3 sm:inset-x-4 flex items-start justify-between pointer-events-none z-20 gap-2">
         {/* Left: Minimalist Project Badge */}
-        <div className="bg-black text-white px-3.5 py-2 rounded-lg flex items-center space-x-2.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#D1B06C] animate-pulse shrink-0" />
-          <div>
-            <div className="text-[10px] text-black/60 font-medium">
+        <div className="bg-[#071E49] text-white px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl shadow-xs border border-slate-700 flex items-center space-x-2 max-w-[55%] sm:max-w-none">
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#D1B06C] animate-pulse shrink-0" />
+          <div className="truncate">
+            <div className="text-[9px] sm:text-[10px] text-[#D1B06C] font-medium leading-tight truncate">
               {project ? 'Mewakili Proyek' : 'Tumpuk Ompreng'}
             </div>
-            <div className="text-xs sm:text-sm font-semibold tracking-tight truncate max-w-[150px] sm:max-w-[220px]">
-              {project ? project.name : 'Sesi Bebas (Siap Didaftarkan)'}
+            <div className="text-xs sm:text-sm font-semibold tracking-tight truncate max-w-[120px] sm:max-w-[220px]">
+              {project ? project.name : 'Sesi Bebas'}
             </div>
           </div>
         </div>
 
         {/* Center/Right: Target / Score Indicator */}
-        <div className="flex flex-col items-end space-y-1.5">
-          <div className="bg-white/90 backdrop-blur-xs border border-black/10 px-3.5 py-2 rounded-xl text-right">
-            <div className="text-[10px] text-black/55 font-medium">
+        <div className="flex flex-col items-end space-y-1 sm:space-y-1.5 shrink-0">
+          <div className="bg-white/95 backdrop-blur-xs border border-slate-200 shadow-xs px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-right">
+            <div className="text-[9px] sm:text-[10px] text-slate-500 font-medium">
               Skor Poin
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-black font-mono leading-none flex items-baseline justify-end space-x-1 mt-0.5">
+            <div className="text-lg sm:text-2xl font-bold text-[#071E49] font-mono leading-none flex items-baseline justify-end space-x-1 mt-0.5">
               <span>{score.toLocaleString()}</span>
-              <span className="text-xs text-black/45 font-sans font-normal">pts</span>
+              <span className="text-[10px] sm:text-xs text-slate-400 font-sans font-normal">pts</span>
             </div>
-            <div className="text-[11px] font-mono text-black/55 mt-0.5">
-              {traysStacked} ompreng ({(traysStacked * 0.045).toFixed(2)}m)
+            <div className="text-[10px] sm:text-[11px] font-mono text-slate-500 mt-0.5">
+              {traysStacked} baki ({(traysStacked * 0.045).toFixed(2)}m)
             </div>
           </div>
 
           {/* Overtake #1 indicator */}
           {rank1Project && traysStacked < rank1Project.bestScore && (
-            <div className="bg-black text-white border-black px-2.5 py-1 rounded-lg text-xs font-medium flex items-center space-x-1.5 shadow-xs">
-              <Target className="w-3 h-3" />
+            <div className="bg-slate-800/90 text-slate-200 border border-slate-700 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-medium flex items-center space-x-1 sm:space-x-1.5 shadow-xs">
+              <Target className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#D1B06C]" />
               <span>
-                <strong className="text-black/60 font-semibold">{gapToRank1}</strong> ompreng menuju #1
+                <strong className="text-[#D1B06C] font-semibold">{gapToRank1}</strong> ompreng lagi
               </span>
             </div>
           )}
 
           {rank1Project && traysStacked >= rank1Project.bestScore && (
-            <div className="bg-[#D1B06C] text-black px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1.5 shadow-xs">
-              <Trophy className="w-3 h-3" />
-              <span>Rekor Juara #1 Terlampaui!</span>
+            <div className="bg-[#D1B06C] text-[#071E49] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold flex items-center space-x-1 sm:space-x-1.5 shadow-xs">
+              <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+              <span>Rekor #1 Terlampaui!</span>
             </div>
           )}
         </div>
       </div>
 
       {/* Bottom Right: Combo Multiplier Card */}
-      <div className="absolute bottom-5 right-5 flex flex-col gap-2 pointer-events-none z-20">
-        <div className="bg-white/95 backdrop-blur-xs p-3 sm:p-3.5 rounded-lg shadow-sm border border-black/10 min-w-[150px]">
-          <div className="flex items-center justify-between">
-            <p className="text-[10px] font-medium text-black/55">
-              Multiplikator Kombo
+      <div className="absolute bottom-16 sm:bottom-5 right-3 sm:right-5 flex flex-col gap-2 pointer-events-none z-20">
+        <div className="bg-white/95 backdrop-blur-xs p-2.5 sm:p-3.5 rounded-xl shadow-sm border border-slate-200 min-w-[120px] sm:min-w-[150px]">
+          <div className="flex items-center justify-between gap-1">
+            <p className="text-[9px] sm:text-[10px] font-medium text-slate-500">
+              Multiplikator
             </p>
             {comboStreak > 0 && (
-              <span className="text-[10px] bg-black/[0.05] text-black/70 font-medium px-1.5 py-0.5 rounded">
-                Streak: {comboStreak}
+              <span className="text-[9px] sm:text-[10px] bg-amber-50 text-amber-700 font-medium px-1 sm:px-1.5 py-0.5 rounded border border-amber-200">
+                Streak {comboStreak}
               </span>
             )}
           </div>
-          <div className="flex items-baseline gap-2 mt-1">
-            <span className={`text-2xl sm:text-3xl font-bold font-mono leading-none ${comboMultiplier > 1 ? 'text-black/60' : 'text-black/80'}`}>
+          <div className="flex items-baseline gap-1.5 sm:gap-2 mt-0.5 sm:mt-1">
+            <span className={`text-xl sm:text-3xl font-bold font-mono leading-none ${comboMultiplier > 1 ? 'text-[#D1B06C]' : 'text-slate-700'}`}>
               x{comboMultiplier}
             </span>
-            <span className="text-xs text-black/55 font-medium">
+            <span className="text-[10px] sm:text-xs text-slate-500 font-medium">
               {comboStreak >= 5 ? 'Pulih!' : comboStreak > 0 ? 'Presisi' : 'Standar'}
             </span>
           </div>
           {comboStreak > 0 && comboStreak % 5 !== 0 && (
-            <div className="w-full bg-black/10 h-1 rounded-full mt-2 overflow-hidden">
+            <div className="w-full bg-slate-100 h-1 rounded-full mt-1.5 sm:mt-2 overflow-hidden">
               <div
                 className="bg-[#D1B06C] h-full transition-all duration-300"
                 style={{ width: `${((comboStreak % 5) / 5) * 100}%` }}
@@ -804,20 +813,20 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
 
       {/* Floating Combo Alert */}
       {comboAlert && (
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 transition-all">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 transition-all px-4 w-full max-w-xs text-center">
           <div
-            className={`px-4 py-2 rounded-xl shadow-lg border text-center flex flex-col items-center gap-0.5 ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl shadow-lg border text-center flex flex-col items-center gap-0.5 ${
               comboAlert.isRestore
                 ? 'bg-emerald-950 text-white border-emerald-500'
-                : 'bg-black text-white border-black/20'
+                : 'bg-[#071E49] text-white border-[#D1B06C]'
             }`}
           >
-            <div className="flex items-center space-x-1.5 text-xs sm:text-sm font-bold text-black/60">
-              <Sparkles className="w-3.5 h-3.5 text-black/60" />
+            <div className="flex items-center space-x-1.5 text-xs sm:text-sm font-bold text-[#D1B06C]">
+              <Sparkles className="w-3.5 h-3.5 text-[#D1B06C]" />
               <span>{comboAlert.title}</span>
             </div>
             {comboAlert.subtitle && (
-              <p className="text-[11px] text-white/70 font-normal">
+              <p className="text-[10px] sm:text-[11px] text-slate-300 font-normal">
                 {comboAlert.subtitle}
               </p>
             )}
@@ -825,12 +834,22 @@ export const ThreeStackEngine: React.FC<ThreeStackEngineProps> = ({
         </div>
       )}
 
-      {/* Start / Tap Hint (Before first interaction) */}
+      {/* Mobile-Friendly Fullscreen Tap Zone Bar at Bottom */}
+      <div className="absolute bottom-3 inset-x-3 sm:hidden pointer-events-none z-20">
+        <div className="bg-[#071E49]/90 backdrop-blur-xs text-white text-center py-2.5 px-4 rounded-xl border border-slate-700/80 shadow-md flex items-center justify-center space-x-2">
+          <Zap className="w-3.5 h-3.5 text-[#D1B06C] animate-pulse" />
+          <span className="text-xs font-semibold text-white">
+            {hasStarted ? 'Ketuk di Mana Saja untuk Menumpuk' : 'Ketuk Layar untuk Mulai Menumpuk'}
+          </span>
+        </div>
+      </div>
+
+      {/* Desktop Start / Tap Hint (Before first interaction) */}
       {!hasStarted && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20 text-center">
-          <div className="bg-black text-white px-5 py-2.5 rounded-full shadow-md border border-black/10 text-xs font-medium flex items-center space-x-2">
-            <Zap className="w-3.5 h-3.5 text-black/60" />
-            <span>Klik atau Tekan Spasi untuk Menumpuk</span>
+        <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none z-20 text-center">
+          <div className="bg-[#071E49] text-white px-5 py-2.5 rounded-full shadow-md border border-slate-700 text-xs font-medium flex items-center space-x-2">
+            <Zap className="w-3.5 h-3.5 text-[#D1B06C]" />
+            <span>Klik Layar atau Tekan Spasi untuk Menumpuk</span>
           </div>
         </div>
       )}

@@ -16,6 +16,7 @@ export interface Project {
   category: ProjectCategory;
   bestScore: number;
   dailyBestScore: number;
+  dailyBestDate?: string;
   runsCount: number;
   clicksCount: number;
   createdAt: number;
@@ -23,6 +24,9 @@ export interface Project {
   verified: boolean;
   lastPlayer?: string;
   badge?: string;
+  creatorId?: string;
+  creatorEmail?: string;
+  creatorName?: string;
 }
 
 export interface GameStats {

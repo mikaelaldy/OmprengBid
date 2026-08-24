@@ -19,7 +19,10 @@
         "updatedAt": { "type": "number" },
         "verified": { "type": "boolean" },
         "badge": { "type": "string" },
-        "lastPlayer": { "type": "string" }
+        "lastPlayer": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorEmail": { "type": "string" },
+        "creatorName": { "type": "string" }
       },
       "required": ["id", "name", "url", "handle", "tagline", "category"]
     },
